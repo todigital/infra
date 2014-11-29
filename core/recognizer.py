@@ -14,9 +14,9 @@ def text_processor(htmlstrings, idealmodel, debug):
     soup = BeautifulSoup(str(htmlstrings))
     title = soup.title.string
     attributes['title'] = title
-    soup.findAll(attrs={"name":"description"})
     attributes['meta:description'] = str(soup.findAll(attrs={"name":"description"}))
     attributes['meta:keywords'] = str(soup.findAll(attrs={"name":"keywords"}))
+    attributes['meta:author'] = str(soup.findAll(attrs={"name":"property"}))
 
     if htmlstrings:
         lineID = 0

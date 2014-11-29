@@ -16,9 +16,11 @@ idealmodel = ''
 debug = 0
 (htmltest, structure, fulltext, attr) = text_processor(filetext1, idealmodel, debug)
 (htmltest, structure, fulltext, attr) = text_processor(filetext2, htmltest, '')
+
+# Output
 for line in fulltext:
     if line:
         print line
-
-print attr['title']
-print attr['meta']
+# Attributes
+for item in attr:
+    print item + ' ' + attr[item]
