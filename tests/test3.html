@@ -1,0 +1,3283 @@
+
+
+<!DOCTYPE html>
+    <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+    <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+    <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+    <!--[if gt IE 8]><!--> <html class="no-js "> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" /><script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={xpid:"UgIPVVRWGwAJXFNXAQc="};window.NREUM||(NREUM={}),__nr_require=function(t,e,n){function r(n){if(!e[n]){var o=e[n]={exports:{}};t[n][0].call(o.exports,function(e){var o=t[n][1][e];return r(o?o:e)},o,o.exports)}return e[n].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<n.length;o++)r(n[o]);return r}({QJf3ax:[function(t,e){function n(t){function e(e,n,a){t&&t(e,n,a),a||(a={});for(var c=s(e),u=c.length,f=i(a,o,r),d=0;u>d;d++)c[d].apply(f,n);return f}function a(t,e){u[t]=s(t).concat(e)}function s(t){return u[t]||[]}function c(){return n(e)}var u={};return{on:a,emit:e,create:c,listeners:s,_events:u}}function r(){return{}}var o="nr@context",i=t("gos");e.exports=n()},{gos:"7eSDFh"}],ee:[function(t,e){e.exports=t("QJf3ax")},{}],3:[function(t){function e(t,e,n,i,s){try{c?c-=1:r("err",[s||new UncaughtException(t,e,n)])}catch(u){try{r("ierr",[u,(new Date).getTime(),!0])}catch(f){}}return"function"==typeof a?a.apply(this,o(arguments)):!1}function UncaughtException(t,e,n){this.message=t||"Uncaught error with no additional information",this.sourceURL=e,this.line=n}function n(t){r("err",[t,(new Date).getTime()])}var r=t("handle"),o=t(4),i=t("ee"),a=window.onerror,s=!1,c=0;t("loader").features.err=!0,window.onerror=e,NREUM.noticeError=n;try{throw new Error}catch(u){"stack"in u&&(t(5),t(3),"addEventListener"in window&&t(1),window.XMLHttpRequest&&XMLHttpRequest.prototype&&XMLHttpRequest.prototype.addEventListener&&t(2),s=!0)}i.on("fn-start",function(){s&&(c+=1)}),i.on("fn-err",function(t,e,r){s&&(this.thrown=!0,n(r))}),i.on("fn-end",function(){s&&!this.thrown&&c>0&&(c-=1)}),i.on("internal-error",function(t){r("ierr",[t,(new Date).getTime(),!0])})},{1:4,2:7,3:5,4:18,5:6,ee:"QJf3ax",handle:"D5DuLP",loader:"G9z0Bl"}],4:[function(t,e){function n(t){i.inPlace(t,["addEventListener","removeEventListener"],"-",r)}function r(t){return t[1]}var o=(t(1),t("ee").create()),i=t(2)(o),a=t("gos");if(e.exports=o,n(window),"getPrototypeOf"in Object){for(var s=document;s&&!s.hasOwnProperty("addEventListener");)s=Object.getPrototypeOf(s);s&&n(s);for(var c=XMLHttpRequest.prototype;c&&!c.hasOwnProperty("addEventListener");)c=Object.getPrototypeOf(c);c&&n(c)}else XMLHttpRequest.prototype.hasOwnProperty("addEventListener")&&n(XMLHttpRequest.prototype);o.on("addEventListener-start",function(t){if(t[1]){var e=t[1];"function"==typeof e?this.wrapped=t[1]=a(e,"nr@wrapped",function(){return i(e,"fn-",null,e.name||"anonymous")}):"function"==typeof e.handleEvent&&i.inPlace(e,["handleEvent"],"fn-")}}),o.on("removeEventListener-start",function(t){var e=this.wrapped;e&&(t[1]=e)})},{1:18,2:19,ee:"QJf3ax",gos:"7eSDFh"}],5:[function(t,e){var n=(t(2),t("ee").create()),r=t(1)(n);e.exports=n,r.inPlace(window,["requestAnimationFrame","mozRequestAnimationFrame","webkitRequestAnimationFrame","msRequestAnimationFrame"],"raf-"),n.on("raf-start",function(t){t[0]=r(t[0],"fn-")})},{1:19,2:18,ee:"QJf3ax"}],6:[function(t,e){function n(t,e,n){var r=t[0];"string"==typeof r&&(r=new Function(r)),t[0]=o(r,"fn-",null,n)}var r=(t(2),t("ee").create()),o=t(1)(r);e.exports=r,o.inPlace(window,["setTimeout","setInterval","setImmediate"],"setTimer-"),r.on("setTimer-start",n)},{1:19,2:18,ee:"QJf3ax"}],7:[function(t,e){function n(){c.inPlace(this,d,"fn-")}function r(t,e){c.inPlace(e,["onreadystatechange"],"fn-")}function o(t,e){return e}var i=t("ee").create(),a=t(1),s=t(2),c=s(i),u=s(a),f=window.XMLHttpRequest,d=["onload","onerror","onabort","onloadstart","onloadend","onprogress","ontimeout"];e.exports=i,window.XMLHttpRequest=function(t){var e=new f(t);try{i.emit("new-xhr",[],e),u.inPlace(e,["addEventListener","removeEventListener"],"-",function(t,e){return e}),e.addEventListener("readystatechange",n,!1)}catch(r){try{i.emit("internal-error",[r])}catch(o){}}return e},window.XMLHttpRequest.prototype=f.prototype,c.inPlace(XMLHttpRequest.prototype,["open","send"],"-xhr-",o),i.on("send-xhr-start",r),i.on("open-xhr-start",r)},{1:4,2:19,ee:"QJf3ax"}],8:[function(t){function e(t){if("string"==typeof t&&t.length)return t.length;if("object"!=typeof t)return void 0;if("undefined"!=typeof ArrayBuffer&&t instanceof ArrayBuffer&&t.byteLength)return t.byteLength;if("undefined"!=typeof Blob&&t instanceof Blob&&t.size)return t.size;if("undefined"!=typeof FormData&&t instanceof FormData)return void 0;try{return JSON.stringify(t).length}catch(e){return void 0}}function n(t){var n=this.params,r=this.metrics;if(!this.ended){this.ended=!0;for(var i=0;c>i;i++)t.removeEventListener(s[i],this.listener,!1);if(!n.aborted){if(r.duration=(new Date).getTime()-this.startTime,4===t.readyState){n.status=t.status;var a=t.responseType,u="arraybuffer"===a||"blob"===a||"json"===a?t.response:t.responseText,f=e(u);if(f&&(r.rxSize=f),this.sameOrigin){var d=t.getResponseHeader("X-NewRelic-App-Data");d&&(n.cat=d.split(", ").pop())}}else n.status=0;r.cbTime=this.cbTime,o("xhr",[n,r,this.startTime])}}}function r(t,e){var n=i(e),r=t.params;r.host=n.hostname+":"+n.port,r.pathname=n.pathname,t.sameOrigin=n.sameOrigin}if(window.XMLHttpRequest&&XMLHttpRequest.prototype&&XMLHttpRequest.prototype.addEventListener&&!/CriOS/.test(navigator.userAgent)){t("loader").features.xhr=!0;var o=t("handle"),i=t(2),a=t("ee"),s=["load","error","abort","timeout"],c=s.length,u=t(1);t(4),t(3),a.on("new-xhr",function(){this.totalCbs=0,this.called=0,this.cbTime=0,this.end=n,this.ended=!1,this.xhrGuids={}}),a.on("open-xhr-start",function(t){this.params={method:t[0]},r(this,t[1]),this.metrics={}}),a.on("open-xhr-end",function(t,e){"loader_config"in NREUM&&"xpid"in NREUM.loader_config&&this.sameOrigin&&e.setRequestHeader("X-NewRelic-ID",NREUM.loader_config.xpid)}),a.on("send-xhr-start",function(t,n){var r=this.metrics,o=t[0],i=this;if(r&&o){var u=e(o);u&&(r.txSize=u)}this.startTime=(new Date).getTime(),this.listener=function(t){try{"abort"===t.type&&(i.params.aborted=!0),("load"!==t.type||i.called===i.totalCbs&&(i.onloadCalled||"function"!=typeof n.onload))&&i.end(n)}catch(e){try{a.emit("internal-error",[e])}catch(r){}}};for(var f=0;c>f;f++)n.addEventListener(s[f],this.listener,!1)}),a.on("xhr-cb-time",function(t,e,n){this.cbTime+=t,e?this.onloadCalled=!0:this.called+=1,this.called!==this.totalCbs||!this.onloadCalled&&"function"==typeof n.onload||this.end(n)}),a.on("xhr-load-added",function(t,e){var n=""+u(t)+!!e;this.xhrGuids&&!this.xhrGuids[n]&&(this.xhrGuids[n]=!0,this.totalCbs+=1)}),a.on("xhr-load-removed",function(t,e){var n=""+u(t)+!!e;this.xhrGuids&&this.xhrGuids[n]&&(delete this.xhrGuids[n],this.totalCbs-=1)}),a.on("addEventListener-end",function(t,e){e instanceof XMLHttpRequest&&"load"===t[0]&&a.emit("xhr-load-added",[t[1],t[2]],e)}),a.on("removeEventListener-end",function(t,e){e instanceof XMLHttpRequest&&"load"===t[0]&&a.emit("xhr-load-removed",[t[1],t[2]],e)}),a.on("fn-start",function(t,e,n){e instanceof XMLHttpRequest&&("onload"===n&&(this.onload=!0),("load"===(t[0]&&t[0].type)||this.onload)&&(this.xhrCbStart=(new Date).getTime()))}),a.on("fn-end",function(t,e){this.xhrCbStart&&a.emit("xhr-cb-time",[(new Date).getTime()-this.xhrCbStart,this.onload,e],e)})}},{1:"XL7HBI",2:9,3:7,4:4,ee:"QJf3ax",handle:"D5DuLP",loader:"G9z0Bl"}],9:[function(t,e){e.exports=function(t){var e=document.createElement("a"),n=window.location,r={};e.href=t,r.port=e.port;var o=e.href.split("://");return!r.port&&o[1]&&(r.port=o[1].split("/")[0].split(":")[1]),r.port&&"0"!==r.port||(r.port="https"===o[0]?"443":"80"),r.hostname=e.hostname||n.hostname,r.pathname=e.pathname,"/"!==r.pathname.charAt(0)&&(r.pathname="/"+r.pathname),r.sameOrigin=!e.hostname||e.hostname===document.domain&&e.port===n.port&&e.protocol===n.protocol,r}},{}],gos:[function(t,e){e.exports=t("7eSDFh")},{}],"7eSDFh":[function(t,e){function n(t,e,n){if(r.call(t,e))return t[e];var o=n();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(t,e,{value:o,writable:!0,enumerable:!1}),o}catch(i){}return t[e]=o,o}var r=Object.prototype.hasOwnProperty;e.exports=n},{}],D5DuLP:[function(t,e){function n(t,e,n){return r.listeners(t).length?r.emit(t,e,n):(o[t]||(o[t]=[]),void o[t].push(e))}var r=t("ee").create(),o={};e.exports=n,n.ee=r,r.q=o},{ee:"QJf3ax"}],handle:[function(t,e){e.exports=t("D5DuLP")},{}],XL7HBI:[function(t,e){function n(t){var e=typeof t;return!t||"object"!==e&&"function"!==e?-1:t===window?0:i(t,o,function(){return r++})}var r=1,o="nr@id",i=t("gos");e.exports=n},{gos:"7eSDFh"}],id:[function(t,e){e.exports=t("XL7HBI")},{}],loader:[function(t,e){e.exports=t("G9z0Bl")},{}],G9z0Bl:[function(t,e){function n(){var t=p.info=NREUM.info;if(t&&t.agent&&t.licenseKey&&t.applicationID&&c&&c.body){p.proto="https"===d.split(":")[0]||t.sslForHttp?"https://":"http://",a("mark",["onload",i()]);var e=c.createElement("script");e.src=p.proto+t.agent,c.body.appendChild(e)}}function r(){"complete"===c.readyState&&o()}function o(){a("mark",["domContent",i()])}function i(){return(new Date).getTime()}var a=t("handle"),s=window,c=s.document,u="addEventListener",f="attachEvent",d=(""+location).split("?")[0],p=e.exports={offset:i(),origin:d,features:{}};c[u]?(c[u]("DOMContentLoaded",o,!1),s[u]("load",n,!1)):(c[f]("onreadystatechange",r),s[f]("onload",n)),a("mark",["firstbyte",i()])},{handle:"D5DuLP"}],18:[function(t,e){function n(t,e,n){e||(e=0),"undefined"==typeof n&&(n=t?t.length:0);for(var r=-1,o=n-e||0,i=Array(0>o?0:o);++r<o;)i[r]=t[e+r];return i}e.exports=n},{}],19:[function(t,e){function n(t){return!(t&&"function"==typeof t&&t.apply&&!t[i])}var r=t("ee"),o=t(1),i="nr@wrapper",a=Object.prototype.hasOwnProperty;e.exports=function(t){function e(t,e,r,a){function nrWrapper(){var n,i,s,u;try{i=this,n=o(arguments),s=r&&r(n,i)||{}}catch(d){f([d,"",[n,i,a],s])}c(e+"start",[n,i,a],s);try{return u=t.apply(i,n)}catch(p){throw c(e+"err",[n,i,p],s),p}finally{c(e+"end",[n,i,u],s)}}return n(t)?t:(e||(e=""),nrWrapper[i]=!0,u(t,nrWrapper),nrWrapper)}function s(t,r,o,i){o||(o="");var a,s,c,u="-"===o.charAt(0);for(c=0;c<r.length;c++)s=r[c],a=t[s],n(a)||(t[s]=e(a,u?s+o:o,i,s,t))}function c(e,n,r){try{t.emit(e,n,r)}catch(o){f([o,e,n,r])}}function u(t,e){if(Object.defineProperty&&Object.keys)try{var n=Object.keys(t);return n.forEach(function(n){Object.defineProperty(e,n,{get:function(){return t[n]},set:function(e){return t[n]=e,e}})}),e}catch(r){f([r])}for(var o in t)a.call(t,o)&&(e[o]=t[o]);return e}function f(e){try{t.emit("internal-error",e)}catch(n){}}return t||(t=r),e.inPlace=s,e.flag=i,e}},{1:18,ee:"QJf3ax"}]},{},["G9z0Bl",3,8]);</script><script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"beacon-3.newrelic.com","queueTime":0,"licenseKey":"4702f272e2","agent":"js-agent.newrelic.com/nr-476.min.js","transactionName":"YgdVbUYHW0tWURFYXVtNcUxaBUFRWFxKV0BaDENcWgJqW1hAAB9EXAdASg4nR0xeUQlUZFwHQA==","applicationID":"3982566","errorBeacon":"bam.nr-data.net","applicationTime":3964}</script>
+
+        
+
+        <title>'Big data' als bedreiging voor het MKB | NU - Het laatste nieuws het eerst op NU.nl</title>
+
+        <meta name="author" content="" />
+
+        
+            <meta name="apple-itunes-app" content="app-id=382059927, app-argument=nunl://article/3522522" />
+        
+
+        
+            <meta name="google-play-app" content="app-id=nl.sanomamedia.android.nu" />
+        
+
+        
+	
+	<meta name="DC.date.issued" content="2013-07-10" />
+	
+
+
+        <meta name="HandheldFriendly" content="True" /><meta name="MobileOptimized" content="320" /><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0, user-scalable=yes" /><meta name="format-detection" content="telephone=yes" /><meta name="apple-mobile-web-app-capable" content="yes" /><meta http-equiv="Cache-Control" content="no-transform" />
+
+        <meta name="keywords" content="Walther Ploos van Amstel" />
+
+        <meta name="description" content="&#39;Big data&#39; zou sectoren minder democratisch kunnen maken. Mogen MKB&#39;ers straks nog wel meedoen?" /><meta name="twitter:card" content="summary" /><meta name="twitter:image" content="http://media.nu.nl/m/m1nx1kuaxpgb_wd1280.jpg/big-data-als-bedreiging-mkb.jpg" /><meta name="twitter:description" content="&#39;Big data&#39; zou sectoren minder democratisch kunnen maken. Mogen MKB&#39;ers straks nog wel meedoen?" /><meta name="title" content="&#39;Big data&#39; als bedreiging voor het MKB" /><meta name="twitter:site" content="@NUnl" /><meta name="twitter:title" content="&#39;Big data&#39; als bedreiging voor het MKB" /><meta name="twitter:url" content="http://www.nu.nl/zakelijk-opinie/3522522/big-data-als-bedreiging-mkb.html" />
+
+        <meta property="og:url" content="http://www.nu.nl/zakelijk-opinie/3522522/big-data-als-bedreiging-mkb.html" /><meta property="og:image" content="http://media.nu.nl/m/m1nx1kuaxpgb_wd1280.jpg/big-data-als-bedreiging-mkb.jpg" /><meta property="og:site_name" content="NU" /><meta property="og:title" content="&#39;Big data&#39; als bedreiging voor het MKB" /><meta property="og:locale" content="nl_NL" /><meta property="og:description" content="&#39;Big data&#39; zou sectoren minder democratisch kunnen maken. Mogen MKB&#39;ers straks nog wel meedoen?" /><meta property="og:type" content="article" />
+
+        
+            <link rel="canonical" href="/zakelijk-opinie/3522522/big-data-als-bedreiging-mkb.html" />
+        
+
+        
+            <link rel="alternate" href="android-app://nl.sanomamedia.android.nu/http/www.nu.nl/zakelijk-opinie/3522522/big-data-als-bedreiging-mkb.html" />
+        
+
+        <link rel="icon" type="image/png" href="/static/img/atoms/images/logos/favicon.ico" />
+        <link rel="apple-touch-icon" href="/static/img/atoms/images/logos/apple-touch-icon.png" />
+        <link href="https://plus.google.com/+NUnl" rel="publisher" />
+
+        <!-- For all browsers -->
+        <meta http-equiv="cleartype" content="on" />
+
+        
+    <script type="text/javascript">
+var context_dc_params = 'CATEGORY=economie;KEYWORDS=walther ploos van amstel;',
+    context = {
+        'dc_params': context_dc_params,
+        'category' : 'economie',
+        'subcategory' : 'opinie, column: walther ploos van amstel, opinie',
+        'article_id' : '3522522',
+        'article_name' : 'big-data-als-bedreiging-mkb',
+        'article_author' : 'nu.nl/NUzakelijk'
+    };
+</script>
+    
+
+            
+
+
+
+
+<!--[if gte IE 10]><!-->
+<link rel="stylesheet" href="/static/CACHE/css/5c09213dac0b.css" type="text/css" media="all" />
+<!--<![endif]-->
+
+
+<!--[if lte IE 9]>
+<link rel="stylesheet" href="/static/CACHE/css/5da22ffe59e7.css" type="text/css" />
+<link rel="stylesheet" href="/static/CACHE/css/e7db66b6a94b.css" type="text/css" />
+<![endif]-->
+<!--[if IE 7]>
+<link rel="stylesheet" href="/static/CACHE/css/e2eec03b764e.css" type="text/css" />
+<![endif]-->
+
+<!-- Block CSS' -->
+
+
+
+            <!--[if (lt IE 9) & (!IEMobile)]>
+                <script type="text/javascript" src="/static/CACHE/js/dd1c023be6b2.js"></script>
+            <![endif]-->
+
+            
+
+<script type="text/javascript" src="/static/CACHE/js/29f6dd193a9c.js"></script>
+
+            <script type="text/javascript">
+                var app_name = 'NU';
+                var app_stage = 'production';
+                var FULL_PATH = '/zakelijk-opinie/3522522/big-data-als-bedreiging-mkb.html';
+                
+            </script>
+
+            
+
+            <script type="text/javascript" src="http://cts.snmmd.nl/service/js/nunl/zakelijk-opinie-artikel/"></script><script type="text/javascript">   var wlrcmd = ""; var context = context || {};   tagging = new Tagging(context);</script>
+            <script type="text/javascript"> try {    if(true) {        tagging.render("head");    } } catch(err) {    console.log(err) } </script>
+
+        
+
+
+        <script type="text/javascript">
+    // contain variables
+    (function() {
+        // Get the viewsize
+        var viewsize = '1-kolom-smal';
+        if (min320) {
+            viewsize = '1-kolom-medium';
+        }
+        if (min480) {
+            viewsize = '1-kolom-breed';
+        }
+        if (min600) {
+            viewsize = '2-kolom-smal';
+        }
+        if (min768) {
+            viewsize = '2-kolom-medium';
+        }
+        if (min992) {
+            viewsize = '3-kolom';
+        }
+
+        // Get the mobile/ipad/desktop detection
+        if (typeof(Consent) != 'undefined' && !Consent.has_optin('stats')) {
+            window['ga-disable-UA-10557259-1'] = true;
+        }
+
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        var _ga_options = {};
+        _ga_options['allowAnchor'] = true;
+
+        ga('create', 'UA-10557259-1', '.www.nu.nl', _ga_options);
+        ga('set', 'dimension1', viewsize);
+        ga('set', 'dimension2', getOrientation());
+        ga('send', 'pageview');
+    })();
+
+    if(window.addEventListener) {
+        window.addEventListener('orientationchange', function () {
+            NU.log('_trackEvent', 'default', 'orientationchange', 'switch_to_' + getOrientation());
+            ga('send', 'event', 'default', 'orientationchange', 'switch_to_' + getOrientation());
+        }, true);
+    }
+
+
+
+
+
+
+</script>
+        
+    <script type="text/javascript">
+        if (ConsentUtility.has_optin('interests')) {
+            var _vrq = _vrq || [];
+            _vrq.push(['id', 118]);
+            _vrq.push(['automate', true]);
+            _vrq.push(['track', function(){}]);
+            (function(d, a) {
+                var s = d.createElement(a),
+                x = d.getElementsByTagName(a)[0];
+                s.async = true;
+                s.src = 'http://a.visualrevenue.com/vrs.js';
+                x.parentNode.insertBefore(s, x);
+            })(document, 'script');
+        }
+    </script>
+
+
+        <!-- Advertorial styling -->
+
+    </head>
+
+    <body id="nu" class="three-columns page-article  nuzakelijk" data-pagetype="article" data-section="zakelijk-opinie">
+        <div class="skip dispnone"><a href="#main">Skip to main content</a></div>
+        <div id="wrapper">
+            
+                <!-- zone|body_top start -->
+<div class="zone" data-zone="body_top" data-vr-zone="body_top">
+    
+        <!-- block|webring start -->
+<div
+    id="block-288781"
+    data-id="block-288781"
+    data-position="1"
+    data-type="webring"
+    class="block webring "
+    data-vr-contentbox="block.webring.1"
+>
+    <div class="block-wrapper horizontal">
+    <div class="block-content">
+
+        <div class="ring">
+            
+                
+                    
+    
+        <a href="http://www.nu.nl" target="_self" class="nav-item nav-main nav-hasimage item-nu trackevent" title="NU" rel="nofollow">
+    
+
+    <div class="nav-wrapper">
+        <div class="nav-item-image">
+            <div class="svg-icon icon-m icon-nu">
+                <img src="/static/img/atoms/images/logos/logo-sprite.svg" alt="NU" />
+            </div>
+        </div>
+        <span class="nav-item-text">NU</span>
+        <div class="clear"></div>
+    </div>
+</a>
+                
+            
+                
+                    
+    <a href="http://www.nu.nl/economie" target="_self" class="nav-item nav-main nav-hasimage item-nuzakelijk current trackevent" title="NUzakelijk" rel="nofollow">
+
+    <div class="nav-wrapper">
+        <div class="nav-item-image">
+            <div class="svg-icon icon-m icon-nuzakelijk">
+                <img src="/static/img/atoms/images/logos/logo-sprite.svg" alt="NUzakelijk" />
+            </div>
+        </div>
+        <span class="nav-item-text">NUzakelijk</span>
+        <div class="clear"></div>
+    </div>
+</a>
+                
+            
+                
+                    
+    
+        <a href="http://www.nusport.nl" target="_blank" class="nav-item nav-main nav-hasimage item-nusport trackevent" title="NUsport" rel="nofollow">
+    
+
+    <div class="nav-wrapper">
+        <div class="nav-item-image">
+            <div class="svg-icon icon-m icon-nusport">
+                <img src="/static/img/atoms/images/logos/logo-sprite.svg" alt="NUsport" />
+            </div>
+        </div>
+        <span class="nav-item-text">NUsport</span>
+        <div class="clear"></div>
+    </div>
+</a>
+                
+            
+                
+                    
+    
+        <a href="http://www.nutech.nl" target="_blank" class="nav-item nav-main nav-hasimage item-nutech trackevent" title="NUtech" rel="nofollow">
+    
+
+    <div class="nav-wrapper">
+        <div class="nav-item-image">
+            <div class="svg-icon icon-m icon-nutech">
+                <img src="/static/img/atoms/images/logos/logo-sprite.svg" alt="NUtech" />
+            </div>
+        </div>
+        <span class="nav-item-text">NUtech</span>
+        <div class="clear"></div>
+    </div>
+</a>
+                
+            
+                
+                    
+    
+        <a href="http://www.nu.nl/entertainment" target="_self" class="nav-item nav-main nav-hasimage item-nuentertainment trackevent" title="NUentertainment" rel="nofollow">
+    
+
+    <div class="nav-wrapper">
+        <div class="nav-item-image">
+            <div class="svg-icon icon-m icon-nuentertainment">
+                <img src="/static/img/atoms/images/logos/logo-sprite.svg" alt="NUentertainment" />
+            </div>
+        </div>
+        <span class="nav-item-text">NUentertainment</span>
+        <div class="clear"></div>
+    </div>
+</a>
+                
+            
+                
+                    
+    
+        <a href="http://www.nu.nl/geldzaken" target="_self" class="nav-item nav-main nav-hasimage item-nugeld trackevent" title="NUgeld" rel="nofollow">
+    
+
+    <div class="nav-wrapper">
+        <div class="nav-item-image">
+            <div class="svg-icon icon-m icon-nugeld">
+                <img src="/static/img/atoms/images/logos/logo-sprite.svg" alt="NUgeld" />
+            </div>
+        </div>
+        <span class="nav-item-text">NUgeld</span>
+        <div class="clear"></div>
+    </div>
+</a>
+                
+            
+                
+                    
+    
+        <a href="http://www.nuwerk.nl" target="_blank" class="nav-item nav-main nav-hasimage item-nuwerk trackevent" title="NUwerk" rel="nofollow">
+    
+
+    <div class="nav-wrapper">
+        <div class="nav-item-image">
+            <div class="svg-icon icon-m icon-nuwerk">
+                <img src="/static/img/atoms/images/logos/logo-sprite.svg" alt="NUwerk" />
+            </div>
+        </div>
+        <span class="nav-item-text">NUwerk</span>
+        <div class="clear"></div>
+    </div>
+</a>
+                
+            
+        </div>
+
+        <div class="search">
+            <div class="molecule-webring-search closed">
+    <div class="search-box">
+        <form action="https://www.google.nl/search?q=site:nu.nl " onsubmit="$('#search-input-q').val('site:nu.nl ' + $('#search-input-q').val()); setTimeout( function() { $('#search-input-q').val(''); },10);" target="_blank">
+            <button type="submit" class="trackevent" data-trackeventlabel="submit-search"><i class="fa fa-search"></i></button>
+            <div class="search-input">
+                <input id="search-input-q" name="q" type="search" placeholder="Zoek nieuws" />
+            </div>
+        </form>
+    </div>
+    <button class="btn search-button trackevent" data-trackeventlabel="toggle-search" type="button">
+        <i class="fa fa-search"></i>
+        <i class="fa fa-times"></i>
+    </button>
+</div>
+        </div>
+
+        <div class="menutrigger">
+            <div class="molecule-webring-menutrigger">
+    <button class="btn toggle-menu menu-left" type="button"></button>
+
+    <div class="nav-branding">
+        <a href="/economie" class="logo trackevent" data-trackeventlabel="logo">
+    <div class="svg-icon icon-main icon-nuzakelijk">
+    <img src="/static/img/atoms/images/logos/logo-sprite.svg" alt="nuzakelijk logo" />
+</div>
+</a>
+        
+            <h3><a href="/zakelijk-opinie">Opinie</a></h3>
+        
+    </div>
+</div>
+        </div>
+
+        <div class="clear"></div>
+    </div>
+</div>
+</div>
+<!-- block|webring end -->
+
+
+    
+</div>
+<!-- zone|body_top end -->
+            
+
+            <div id="container">
+                <div id="header">
+                    
+                        <!-- zone|header start -->
+<div class="zone" data-zone="header" data-vr-zone="header">
+    
+        <!-- block|smartbanner start -->
+<div
+    id="block-288783"
+    data-id="block-288783"
+    data-position="1"
+    data-type="smartbanner"
+    class="block smartbanner "
+    data-vr-contentbox="block.smartbanner.1"
+>
+    <div class="block-wrapper">
+    <div class="block-content">
+
+    </div>
+</div>
+</div>
+<!-- block|smartbanner end -->
+
+
+    
+        <!-- block|cts start -->
+<div
+    id="block-288785"
+    data-id="block-288785"
+    data-position="2"
+    data-type="cts"
+    class="block cts "
+    data-vr-contentbox="block.cts.2"
+>
+    
+<div class="block-wrapper mtop_320">
+    <div class="block-content">
+        
+            <div id="cts_6826972256ba4aed8abb012a89e51d62" class="cts-wrapper min320 max480 set-block"><script type="text/javascript"> try {    if(min320 && max480) {        tagging.render("mtop_320");    } } catch(err) {    console.log(err) } </script></div>
+        
+    </div>
+</div>
+</div>
+<!-- block|cts end -->
+
+
+    
+        <!-- block|cts start -->
+<div
+    id="block-288787"
+    data-id="block-288787"
+    data-position="3"
+    data-type="cts"
+    class="block cts "
+    data-vr-contentbox="block.cts.3"
+>
+    
+<div class="block-wrapper dtop_468">
+    <div class="block-content">
+        
+            <div id="cts_580d1424142742589703e9eb129ae7cb" class="cts-wrapper min480 max768 set-block"><script type="text/javascript"> try {    if(min480 && max768) {        tagging.render("dtop_468");    } } catch(err) {    console.log(err) } </script></div>
+        
+    </div>
+</div>
+</div>
+<!-- block|cts end -->
+
+
+    
+        <!-- block|cts start -->
+<div
+    id="block-288789"
+    data-id="block-288789"
+    data-position="4"
+    data-type="cts"
+    class="block cts "
+    data-vr-contentbox="block.cts.4"
+>
+    
+<div class="block-wrapper dtop_728">
+    <div class="block-content">
+        
+            <div id="cts_4100021089764802ad03265653ff3623" class="cts-wrapper min768 max992 set-block"><script type="text/javascript"> try {    if(min768 && max992) {        tagging.render("dtop_728");    } } catch(err) {    console.log(err) } </script></div>
+        
+    </div>
+</div>
+</div>
+<!-- block|cts end -->
+
+
+    
+        <!-- block|cts start -->
+<div
+    id="block-288791"
+    data-id="block-288791"
+    data-position="5"
+    data-type="cts"
+    class="block cts "
+    data-vr-contentbox="block.cts.5"
+>
+    
+<div class="block-wrapper dtop_970_728">
+    <div class="block-content">
+        
+            <div id="cts_c14228d26cbc45fe8e8e2b386dd6a0e3" class="cts-wrapper min992 set-block"><script type="text/javascript"> try {    if(min992) {        tagging.render("dtop_970_728");    } } catch(err) {    console.log(err) } </script></div>
+        
+    </div>
+</div>
+</div>
+<!-- block|cts end -->
+
+
+    
+</div>
+<!-- zone|header end -->
+                    
+                </div>
+                <div id="content_container">
+                    <div id="menu" class="column first nu-main-menu nu-main-menu-left">
+                        <div class="column-content">
+                            
+                                <!-- zone|menu start -->
+<div class="zone" data-zone="menu" data-vr-zone="menu">
+    
+        <!-- block|menu start -->
+<div
+    id="block-288795"
+    data-id="block-288795"
+    data-position="1"
+    data-type="menu"
+    class="block menu compact"
+    data-vr-contentbox="block.menu.1"
+>
+    <!-- Left menu element-->
+<nav>
+	<div class="nav-branding">
+        <div class="nav-item nav-title">
+            <a href="/economie" class="logo trackevent" data-trackeventlabel="logo">
+    <div class="svg-icon icon-main icon-nuzakelijk">
+    <img src="/static/img/atoms/images/logos/logo-sprite.svg" alt="nuzakelijk logo" />
+</div>
+</a>
+            <h3>NU</h3>
+            <div class="clear"></div>
+        </div>
+        <button class="btn nav-close" type="button"></button>
+    </div>
+
+    <div class="nav-content">
+        
+            
+
+    
+
+    <a href="/" class="nav-item nav-main   first trackevent" >
+        Voorpagina
+    </a>
+
+    
+
+    
+
+
+
+    
+
+    <a href="/net-binnen/" class="nav-item nav-main    trackevent" >
+        Net binnen
+    </a>
+
+    
+
+    
+
+
+
+    
+
+    <a href="/weekend" class="nav-item nav-main    trackevent" >
+        NUweekend
+    </a>
+
+    
+
+    
+
+
+
+    <div class="nav-group">
+
+    <a href="/algemeen" class="nav-item nav-main    trackevent" >
+        Algemeen
+    </a>
+
+    
+        <div class="nav-children">
+            
+                
+
+    
+
+    <a href="/binnenland" class="nav-item nav-sub   first trackevent" >
+        Binnenland
+    </a>
+
+    
+
+    
+
+
+
+    
+
+    <a href="/buitenland" class="nav-item nav-sub    trackevent" >
+        Buitenland
+    </a>
+
+    
+
+    
+
+
+
+    
+
+    <a href="/politiek" class="nav-item nav-sub   last trackevent" >
+        Politiek
+    </a>
+
+    
+
+    
+
+
+
+            
+        </div>
+    
+
+    </div>
+
+
+
+    <div class="nav-group">
+
+    <a href="/economie" class="nav-item nav-main    trackevent" >
+        Economie
+    </a>
+
+    
+        <div class="nav-children">
+            
+                
+
+    
+
+    <a href="/geldzaken" class="nav-item nav-sub   first trackevent" >
+        Geld
+    </a>
+
+    
+
+    
+
+
+
+    
+
+    <a href="/ondernemen" class="nav-item nav-sub    trackevent" >
+        Ondernemen
+    </a>
+
+    
+
+    
+
+
+
+    
+
+    <a href="/beurs" class="nav-item nav-sub   last trackevent" >
+        Beurs
+    </a>
+
+    
+
+    
+
+
+
+            
+        </div>
+    
+
+    </div>
+
+
+
+    
+
+    <a href="/sport" class="nav-item nav-main    trackevent" >
+        Sport
+    </a>
+
+    
+
+    
+
+
+
+    <div class="nav-group">
+
+    <a href="/tech" class="nav-item nav-main    trackevent" >
+        Tech
+    </a>
+
+    
+        <div class="nav-children">
+            
+                
+
+    
+
+    <a href="/internet" class="nav-item nav-sub   first trackevent" >
+        Internet
+    </a>
+
+    
+
+    
+
+
+
+    
+
+    <a href="/gadgets" class="nav-item nav-sub    trackevent" >
+        Gadgets
+    </a>
+
+    
+
+    
+
+
+
+    
+
+    <a href="/games" class="nav-item nav-sub   last trackevent" >
+        Games
+    </a>
+
+    
+
+    
+
+
+
+            
+        </div>
+    
+
+    </div>
+
+
+
+    <div class="nav-group">
+
+    <a href="/entertainment" class="nav-item nav-main    trackevent" >
+        Entertainment
+    </a>
+
+    
+        <div class="nav-children">
+            
+                
+
+    
+
+    <a href="/achterklap" class="nav-item nav-sub   first trackevent" >
+        Achterklap
+    </a>
+
+    
+
+    
+
+
+
+    
+
+    <a href="/film" class="nav-item nav-sub    trackevent" >
+        Films en series
+    </a>
+
+    
+
+    
+
+
+
+    
+
+    <a href="/muziek" class="nav-item nav-sub    trackevent" >
+        Muziek
+    </a>
+
+    
+
+    
+
+
+
+    
+
+    <a href="/boek" class="nav-item nav-sub    trackevent" >
+        Boek
+    </a>
+
+    
+
+    
+
+
+
+    
+
+    <a href="/media" class="nav-item nav-sub    trackevent" >
+        Media
+    </a>
+
+    
+
+    
+
+
+
+    
+
+    <a href="/cultuur-overig" class="nav-item nav-sub   last trackevent" >
+        Cultuur
+    </a>
+
+    
+
+    
+
+
+
+            
+        </div>
+    
+
+    </div>
+
+
+
+    <div class="nav-group">
+
+    <a href="/overig" class="nav-item nav-main    trackevent" >
+        Overig
+    </a>
+
+    
+        <div class="nav-children">
+            
+                
+
+    
+
+    <a href="/opmerkelijk" class="nav-item nav-sub   first trackevent" >
+        Opmerkelijk
+    </a>
+
+    
+
+    
+
+
+
+    
+
+    <a href="/wetenschap" class="nav-item nav-sub    trackevent" >
+        Wetenschap
+    </a>
+
+    
+
+    
+
+
+
+    
+
+    <a href="/gezondheid" class="nav-item nav-sub    trackevent" >
+        Gezondheid
+    </a>
+
+    
+
+    
+
+
+
+    
+
+    <a href="/lifestyle" class="nav-item nav-sub    trackevent" >
+        Lifestyle
+    </a>
+
+    
+
+    
+
+
+
+    
+
+    <a href="/auto" class="nav-item nav-sub   last trackevent" >
+        Auto
+    </a>
+
+    
+
+    
+
+
+
+            
+        </div>
+    
+
+    </div>
+
+
+
+    <div class="nav-group">
+
+    <a href="/regio" class="nav-item nav-main   last trackevent" >
+        Regionaal
+    </a>
+
+    
+        <div class="nav-children">
+            
+                
+
+    
+
+    <a href="/amsterdam" class="nav-item nav-sub   first trackevent" >
+        Amsterdam
+    </a>
+
+    
+
+    
+
+
+
+    
+
+    <a href="/utrecht" class="nav-item nav-sub    trackevent" >
+        Utrecht
+    </a>
+
+    
+
+    
+
+
+
+    
+
+    <a href="/groningen" class="nav-item nav-sub    trackevent" >
+        Groningen
+    </a>
+
+    
+
+    
+
+
+
+    
+
+    <a href="/rotterdam/" class="nav-item nav-sub    trackevent" >
+        Rotterdam
+    </a>
+
+    
+
+    
+
+
+
+    
+
+    <a href="/den-haag/" class="nav-item nav-sub    trackevent" >
+        Den Haag
+    </a>
+
+    
+
+    
+
+
+
+    
+
+    <a href="/salland" class="nav-item nav-sub   last trackevent" >
+        Salland
+    </a>
+
+    
+
+    
+
+
+
+            
+        </div>
+    
+
+    </div>
+
+
+
+        
+        <div class="clear"></div>
+    </div>
+
+    <div class="nav-separator"></div>
+
+	<div class="nav-content nav-webring">
+        
+            
+                
+    
+        <a href="http://www.nu.nl" target="_self" class="nav-item nav-main nav-hasimage item-nu trackevent" title="NU" rel="nofollow">
+    
+
+    <div class="nav-wrapper">
+        <div class="nav-item-image">
+            <div class="svg-icon icon-m icon-nu">
+                <img src="/static/img/atoms/images/logos/logo-sprite.svg" alt="NU" />
+            </div>
+        </div>
+        <span class="nav-item-text">NU</span>
+        <div class="clear"></div>
+    </div>
+</a>
+            
+        
+            
+                
+    <a href="http://www.nu.nl/economie" target="_self" class="nav-item nav-main nav-hasimage item-nuzakelijk current trackevent" title="NUzakelijk" rel="nofollow">
+
+    <div class="nav-wrapper">
+        <div class="nav-item-image">
+            <div class="svg-icon icon-m icon-nuzakelijk">
+                <img src="/static/img/atoms/images/logos/logo-sprite.svg" alt="NUzakelijk" />
+            </div>
+        </div>
+        <span class="nav-item-text">NUzakelijk</span>
+        <div class="clear"></div>
+    </div>
+</a>
+            
+        
+            
+                
+    
+        <a href="http://www.nusport.nl" target="_blank" class="nav-item nav-main nav-hasimage item-nusport trackevent" title="NUsport" rel="nofollow">
+    
+
+    <div class="nav-wrapper">
+        <div class="nav-item-image">
+            <div class="svg-icon icon-m icon-nusport">
+                <img src="/static/img/atoms/images/logos/logo-sprite.svg" alt="NUsport" />
+            </div>
+        </div>
+        <span class="nav-item-text">NUsport</span>
+        <div class="clear"></div>
+    </div>
+</a>
+            
+        
+            
+                
+    
+        <a href="http://www.nutech.nl" target="_blank" class="nav-item nav-main nav-hasimage item-nutech trackevent" title="NUtech" rel="nofollow">
+    
+
+    <div class="nav-wrapper">
+        <div class="nav-item-image">
+            <div class="svg-icon icon-m icon-nutech">
+                <img src="/static/img/atoms/images/logos/logo-sprite.svg" alt="NUtech" />
+            </div>
+        </div>
+        <span class="nav-item-text">NUtech</span>
+        <div class="clear"></div>
+    </div>
+</a>
+            
+        
+            
+                
+    
+        <a href="http://www.nu.nl/entertainment" target="_self" class="nav-item nav-main nav-hasimage item-nuentertainment trackevent" title="NUentertainment" rel="nofollow">
+    
+
+    <div class="nav-wrapper">
+        <div class="nav-item-image">
+            <div class="svg-icon icon-m icon-nuentertainment">
+                <img src="/static/img/atoms/images/logos/logo-sprite.svg" alt="NUentertainment" />
+            </div>
+        </div>
+        <span class="nav-item-text">NUentertainment</span>
+        <div class="clear"></div>
+    </div>
+</a>
+            
+        
+            
+                
+    
+        <a href="http://www.nu.nl/geldzaken" target="_self" class="nav-item nav-main nav-hasimage item-nugeld trackevent" title="NUgeld" rel="nofollow">
+    
+
+    <div class="nav-wrapper">
+        <div class="nav-item-image">
+            <div class="svg-icon icon-m icon-nugeld">
+                <img src="/static/img/atoms/images/logos/logo-sprite.svg" alt="NUgeld" />
+            </div>
+        </div>
+        <span class="nav-item-text">NUgeld</span>
+        <div class="clear"></div>
+    </div>
+</a>
+            
+        
+            
+                
+    
+        <a href="http://www.nuwerk.nl" target="_blank" class="nav-item nav-main nav-hasimage item-nuwerk trackevent" title="NUwerk" rel="nofollow">
+    
+
+    <div class="nav-wrapper">
+        <div class="nav-item-image">
+            <div class="svg-icon icon-m icon-nuwerk">
+                <img src="/static/img/atoms/images/logos/logo-sprite.svg" alt="NUwerk" />
+            </div>
+        </div>
+        <span class="nav-item-text">NUwerk</span>
+        <div class="clear"></div>
+    </div>
+</a>
+            
+        
+        <div class="clear"></div>
+    </div>
+</nav>
+</div>
+<!-- block|menu end -->
+
+
+    
+        <!-- block|cts start -->
+<div
+    id="block-288797"
+    data-id="block-288797"
+    data-position="2"
+    data-type="cts"
+    class="block cts compact"
+    data-vr-contentbox="block.cts.2"
+>
+    
+<div class="block-wrapper dmid_160_120">
+    <div class="block-content">
+        
+            <div id="cts_c308fe6af00a40bcac41ce0904d00b61" class="cts-wrapper min992 set-block"><script type="text/javascript"> try {    if(min992) {        tagging.render("dmid_160_120");    } } catch(err) {    console.log(err) } </script></div>
+        
+    </div>
+</div>
+</div>
+<!-- block|cts end -->
+
+
+    
+</div>
+<!-- zone|menu end -->
+                            
+                        </div>
+                    </div>
+                    <div id="main" class="column two last">
+                        <div class="column-content">
+
+                            <!-- zone|top start -->
+<div class="zone" data-zone="top" data-vr-zone="top">
+    
+        <!-- block|topbar start -->
+<div
+    id="block-288793"
+    data-id="block-288793"
+    data-position="1"
+    data-type="topbar"
+    class="block topbar "
+    data-vr-contentbox="block.topbar.1"
+>
+    <div class="block-wrapper">
+    <div class="column first">
+        <div class="block slogan">
+    <div class="block-wrapper">
+        <div class="block-content">
+            Zaterdag 29 november 2014
+            <div class="min600 set-inline">
+                <div class="divider dotted vertical">|</div>
+                <span>Het laatste nieuws het eerst op NU.nl</span>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+    <div class="column last">
+        <div class="block widgets">
+    <div class="block-wrapper">
+        <div class="widget-wrapper">
+            <div class="btn fixed-l widget weather">
+                <a href="/weer" class="btn-content trackevent" data-trackeventlabel="weather" data-trackeventcategory="widget" data-trackeventaction="click">
+                    <span class="btn-centered">
+                        <span class="dispnone">Temperatuur</span>
+                        
+                            <i class="btn-icon fc fc-weather-b"></i>
+                            <span class="btn-text">6 &deg;C</span>
+                        
+                    </span>
+                </a>
+            </div>
+        </div>
+
+        <div class="widget-wrapper">
+            <div class="btn fixed-l widget traffic">
+                <a href="/verkeer" class="btn-content trackevent" data-trackeventlabel="traffic" data-trackeventcategory="widget" data-trackeventaction="click">
+                    <span class="btn-centered">
+                        <span class="btn-icon"></span>
+                        <span class="dispnone">Vervoer</span>
+                        <span class="btn-text">
+                            
+                                1
+                            
+                             File
+                        </span>
+                        <span class="btn-text dispnone">
+                            0 NS
+                        </span>
+                        <span class="btn-text dispnone">
+                            &euro; 1.699
+                        </span>
+                    </span>
+                </a>
+            </div>
+        </div>
+
+        <div class="widget-wrapper">
+            <div class="btn fixed-l widget stocks">
+                <a href="/aandelen" class="btn-content trackevent" data-trackeventlabel="stocks" data-trackeventcategory="widget" data-trackeventaction="click">
+                    <span class="btn-centered">
+                        <span class="btn-icon"></span>
+                        <span class="dispnone">AEX</span>
+                        <span class="btn-text">425,86</span>
+                    </span>
+                </a>
+            </div>
+        </div>
+
+        <div class="widget-wrapper">
+            <div class="btn fixed-l widget tvguide">
+                <a href="/tvgids" class="btn-content trackevent" data-trackeventlabel="tvguide" data-trackeventcategory="widget" data-trackeventaction="click">
+                    <span class="btn-centered">
+                        <span class="btn-icon"></span>
+                        <span class="btn-text">TV gids</span>
+                    </span>
+                </a>
+            </div>
+        </div>
+
+        <div class="widget-wrapper">
+            <div class="btn fixed-l widget sports">
+                <a href="http://www.nusport.nl/live/voetbal" target="_blank" class="btn-content trackevent" data-trackeventlabel="sports" data-trackeventcategory="widget" data-trackeventaction="click">
+                    <span class="btn-centered">
+                        <span class="btn-icon"></span>
+                        <span class="dispnone">Live voetbalwedstrijden</span>
+                        <span class="btn-text">0 Live</span>
+                    </span>
+                </a>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+
+    </div>
+    <div class="clear"></div>
+</div>
+</div>
+<!-- block|topbar end -->
+
+
+    <script type="text/javascript">
+        jQuery('#block-288793').data({"url": "/block/json/topbar?section=zakelijk-opinie", "refresh": 60});
+    </script>
+
+    
+</div>
+<!-- zone|top end -->
+
+                            <div class="clear"></div>
+
+                            <div class="column first">
+                                <div class="column-content">
+                                    <div class="column-content-background">
+                                        
+
+    
+        <!-- zone|main start -->
+<div class="zone" data-zone="main" data-vr-zone="main">
+    
+        <!-- block|breadcrumb start -->
+<div
+    id="block-288799"
+    data-id="block-288799"
+    data-position="1"
+    data-type="breadcrumb"
+    class="block breadcrumb "
+    data-vr-contentbox="block.breadcrumb.1"
+>
+    <div class="block-wrapper section-nuzakelijk">
+    <div class="block-content">
+        <ul class="inline">
+            
+                <li class="first">
+                    
+                        <a href="/" class="trackevent" data-trackeventlabel="nu.nl">NU.nl</a>
+                    
+                </li>
+            
+                <li class="">
+                    
+                        <a href="/economie" class="trackevent" data-trackeventlabel="economie">Economie</a>
+                    
+                </li>
+            
+                <li class=" active">
+                    
+                        <a href="/zakelijk-opinie" class="trackevent" data-trackeventlabel="opinie">Opinie</a>
+                    
+                </li>
+            
+                <li class="last hidden">
+                    
+                        <a href="#">&#39;Big data&#39; als bedreiging voor het MKB</a>
+                    
+                </li>
+            
+        </ul>
+        <div class="clear"></div>
+    </div>
+</div>
+</div>
+<!-- block|breadcrumb end -->
+
+
+    
+        <!-- block|article.header start -->
+<div
+    id="block-288801"
+    data-id="block-288801"
+    data-position="2"
+    data-type="article.header"
+    class="block article header "
+    data-vr-contentbox="block.article.header.2"
+>
+    <div class="block-wrapper ">
+    <div class="block-content">
+        <div class="  ">
+
+            <div class="articleheader-image">
+                <div class="image-wrapper">
+                    <div class="item-image">
+                        <noscript>
+                            <img src="http://media.nu.nl/m/m1nx1kuaxpgb_wd640.jpg/big-data-als-bedreiging-mkb.jpg" alt="&#39;Big data&#39; als bedreiging voor het MKB" />
+                        </noscript>
+                        <img data-src="http://media.nu.nl/m/m1nx1kuaxpgb_wd640.jpg/big-data-als-bedreiging-mkb.jpg" src="/static/img/placeholders/wd640-o.png" class="image lazy-unveil" alt="" />
+                    </div>
+
+                    <div class="image-overlay">
+                        <div class="title">
+    
+        <h1 class="fluid">
+            &#39;Big data&#39; als bedreiging voor het MKB
+            <span class="mediaicons"><i class="mediaicon-slideshow"></i><i class="mediaicon-infographic"></i><i class="mediaicon-video"></i></span>
+
+        </h1>
+    
+</div>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="clear"></div>
+            <div class="footer">
+    <div class="left">
+        <div class="dates">
+            <span class="published">Gepubliceerd: <span class="large">10 juli 2013 09:09</span><span class="small">10-07-13 09:09</span></span>
+            <span class="update">Laatste update:
+                
+                    <span class="large">10 juli 2013 09:09</span><span class="small">10-07-13 09:09</span>
+                
+            </span>
+        </div>
+    </div>
+
+    <div class="socialbuttons right">
+        <div class="badges">
+            
+<ul class="social-badges">
+    <li class="nujij last">
+        <a href="http://www.nujij.nl/jij.lynkx/?i=http%3A%2F%2Fmedia.nu.nl%2Fm%2Fm1nx1kuaxpgb.jpg&x=Walther+Ploos+van+Amstel&b=%27Big+data%27+zou+sectoren+minder+democratisch+kunnen+maken.+Mogen+MKB%27ers+straks+nog+wel+meedoen%3F&u=http%3A%2F%2Fwww.nu.nl%2Fzakelijk-opinie%2F3522522%2Fbig-data-als-bedreiging-mkb.html&t=%27Big+data%27+als+bedreiging+voor+het+MKB" rel="nofollow" target="_blank"  class="tracksocial" data-tracksocialtarget="http://www.nu.nl/zakelijk-opinie/3522522/big-data-als-bedreiging-mkb.html" data-tracksocialnetwork="nujij" data-tracksocialaction="send1">
+            <i class="fc fc-nujij fa-lg"></i>
+        </a>
+    </li>
+    <li class="facebook first">
+        <a href="http://www.facebook.com/sharer.php?p%5Btitle%5D=%27Big+data%27+als+bedreiging+voor+het+MKB&p%5Burl%5D=http%3A%2F%2Fwww.nu.nl%2Fzakelijk-opinie%2F3522522%2Fbig-data-als-bedreiging-mkb.html&s=100&p%5Bimages%5D%5B0%5D=http%3A%2F%2Fmedia.nu.nl%2Fm%2Fm1nx1kuaxpgb_wd1280.jpg&p%5Bsummary%5D=%27Big+data%27+zou+sectoren+minder+democratisch+kunnen+maken.+Mogen+MKB%27ers+straks+nog+wel+meedoen%3F" rel="nofollow" target="_blank" class="tracksocial" data-tracksocialtarget="http://www.nu.nl/zakelijk-opinie/3522522/big-data-als-bedreiging-mkb.html" data-tracksocialnetwork="facebook" data-tracksocialaction="like">
+            <i class="fa fa-facebook fa-lg"></i>
+        </a>
+    </li>
+    <li class="twitter">
+        <a href="http://twitter.com/intent/tweet/?url=http%3A%2F%2Fwww.nu.nl%2Fzakelijk-opinie%2F3522522%2Fbig-data-als-bedreiging-mkb.html&text=%27Big+data%27+als+bedreiging+voor+het+MKB&via=NUnl" rel="nofollow" target="_blank" class="tracksocial" data-tracksocialtarget="http://www.nu.nl/zakelijk-opinie/3522522/big-data-als-bedreiging-mkb.html" data-tracksocialnetwork="twitter" data-tracksocialaction="tweet">
+            <i class="fa fa-twitter fa-lg"></i>
+        </a>
+    </li>
+    <li class="googleplus">
+        <a href="https://plus.google.com/share?url=http%3A%2F%2Fwww.nu.nl%2Fzakelijk-opinie%2F3522522%2Fbig-data-als-bedreiging-mkb.html" rel="nofollow" target="_blank"  class="tracksocial" data-tracksocialtarget="http://www.nu.nl/zakelijk-opinie/3522522/big-data-als-bedreiging-mkb.html" data-tracksocialnetwork="google" data-tracksocialaction="send">
+            <i class="fa fa-google-plus fa-lg"></i>
+        </a>
+    </li>
+</ul>
+        </div>
+        <a href="#" class="button">
+            Deel
+        </a>
+        <div class="tooltip-badges">
+            <div class="box">
+                
+<ul class="social-badges">
+    <li class="nujij last">
+        <a href="http://www.nujij.nl/jij.lynkx/?i=http%3A%2F%2Fmedia.nu.nl%2Fm%2Fm1nx1kuaxpgb.jpg&x=Walther+Ploos+van+Amstel&b=%27Big+data%27+zou+sectoren+minder+democratisch+kunnen+maken.+Mogen+MKB%27ers+straks+nog+wel+meedoen%3F&u=http%3A%2F%2Fwww.nu.nl%2Fzakelijk-opinie%2F3522522%2Fbig-data-als-bedreiging-mkb.html&t=%27Big+data%27+als+bedreiging+voor+het+MKB" rel="nofollow" target="_blank"  class="tracksocial" data-tracksocialtarget="http://www.nu.nl/zakelijk-opinie/3522522/big-data-als-bedreiging-mkb.html" data-tracksocialnetwork="nujij" data-tracksocialaction="send1">
+            <i class="fc fc-nujij fa-lg"></i>
+        </a>
+    </li>
+    <li class="facebook first">
+        <a href="http://www.facebook.com/sharer.php?p%5Btitle%5D=%27Big+data%27+als+bedreiging+voor+het+MKB&p%5Burl%5D=http%3A%2F%2Fwww.nu.nl%2Fzakelijk-opinie%2F3522522%2Fbig-data-als-bedreiging-mkb.html&s=100&p%5Bimages%5D%5B0%5D=http%3A%2F%2Fmedia.nu.nl%2Fm%2Fm1nx1kuaxpgb_wd1280.jpg&p%5Bsummary%5D=%27Big+data%27+zou+sectoren+minder+democratisch+kunnen+maken.+Mogen+MKB%27ers+straks+nog+wel+meedoen%3F" rel="nofollow" target="_blank" class="tracksocial" data-tracksocialtarget="http://www.nu.nl/zakelijk-opinie/3522522/big-data-als-bedreiging-mkb.html" data-tracksocialnetwork="facebook" data-tracksocialaction="like">
+            <i class="fa fa-facebook fa-lg"></i>
+        </a>
+    </li>
+    <li class="twitter">
+        <a href="http://twitter.com/intent/tweet/?url=http%3A%2F%2Fwww.nu.nl%2Fzakelijk-opinie%2F3522522%2Fbig-data-als-bedreiging-mkb.html&text=%27Big+data%27+als+bedreiging+voor+het+MKB&via=NUnl" rel="nofollow" target="_blank" class="tracksocial" data-tracksocialtarget="http://www.nu.nl/zakelijk-opinie/3522522/big-data-als-bedreiging-mkb.html" data-tracksocialnetwork="twitter" data-tracksocialaction="tweet">
+            <i class="fa fa-twitter fa-lg"></i>
+        </a>
+    </li>
+    <li class="googleplus">
+        <a href="https://plus.google.com/share?url=http%3A%2F%2Fwww.nu.nl%2Fzakelijk-opinie%2F3522522%2Fbig-data-als-bedreiging-mkb.html" rel="nofollow" target="_blank"  class="tracksocial" data-tracksocialtarget="http://www.nu.nl/zakelijk-opinie/3522522/big-data-als-bedreiging-mkb.html" data-tracksocialnetwork="google" data-tracksocialaction="send">
+            <i class="fa fa-google-plus fa-lg"></i>
+        </a>
+    </li>
+</ul>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+        </div>
+
+        <div class="item-excerpt">
+    
+        'Big data' zou sectoren minder democratisch kunnen maken. Mogen MKB'ers straks nog wel meedoen?
+        <div class="clear"></div>
+    
+</div>
+    </div>
+    <div class="clear"></div>
+</div>
+</div>
+<!-- block|article.header end -->
+
+
+    
+        <!-- block|article.body start -->
+<div
+    id="block-288803"
+    data-id="block-288803"
+    data-position="3"
+    data-type="article.body"
+    class="block article body "
+    data-vr-contentbox="block.article.body.3"
+>
+    
+    <div class="block-wrapper">
+        <div class="block-content">
+            <p><em>Door: Walther Ploos van Amstel</em></p>&#13;
+&#13;
+<p><span>De blogs staan vol over de kracht van 'big data'. Dat zijn grote hoeveelheden data uit verschillende systemen en sensoren die informatie geven over hoe processen nu echt verlopen en waar de knelpunten zitten.</span></p>&#13;
+&#13;
+<p><span>Als we joggen legt de Ru</span><span>nkeeper onze looprondjes vast. In de modewinkel worden mobieltjes gevolgd om te kijken wat de beste verkopende vierkante meters zijn.</span></p>&#13;
+&#13;
+<p><span>Selektvracht weet welke consumenten steevast niet thuis zijn als ze een pakje willen bezorgen. Je kunt precies zien bij welke klant de thuiszorghulp te lang koffie heeft gedronken.</span></p>&#13;
+&#13;
+<p><span>Big data uit de sociale media vertellen alles over het imago van een merk. De bloemenhandel weet precies waar in de zeecontainerketen tussen Afrika en Nederland hun rozen niet genoeg gekoeld werden.</span></p>&#13;
+&#13;
+<p><span>En, met de gegevens uit onze TomTom kan de Politie kijken waar ze het beste scoren met snelheidscontroles. Big data levert&#160;geld op.</span></p>&#13;
+&#13;
+<a id="anchor-strongwachtenstrong"></a><h2><strong>Wachten</strong></h2>&#13;
+&#13;
+<p>Ook wordt het&#160;met succes gebruikt in de transportsector. Een vrachtwagen rijdt amper 33 kilometers per uur en staat de helft van de tijd stil, omdat de planner rekening moet houden met onbetrouwbare lostijden.</p>&#13;
+&#13;
+<p><span>Dat is niet duurzaam. Retailers, transporteurs en levensmiddelenproducenten pakken dat op in het Nederlandse Kampioenschap &#8216;Speed Docking&#8217;.</span></p>&#13;
+&#13;
+<p><span>Analyse van meer dan 30.000 transportritten van 12 producenten leert dat met de aanpak van lostijden een op de vijf vrachtwagens van de weg kan. Data analisten konden moeiteloos de big data uit de ERP-systemen en boordcomputers halen.</span></p>&#13;
+&#13;
+<p>Dat is schatgraven, want die data zijn goud waard. Maar, voor wie eigenlijk? Van wie zijn die big data?</p>&#13;
+&#13;
+<a id="anchor-strongolifanten-dansenstrong"></a><h2><strong>Olifanten dansen</strong></h2>&#13;
+&#13;
+<p>Het gebruik van big data vraagt om standaarden&#160;voor alle gegevens uit de ketens. Anders zijn die gegevens niet betrouwbaar. Zijn die gestandaardiseerde data ook voor iedereen, open en transparant, beschikbaar. Of, toch niet? Wat doen Google, Vodafone en TomTom allemaal met mijn gegevens?</p>&#13;
+&#13;
+<p><span>Democratiseren transparantie en big data straks sectoren waarbij vele kleine ondernemers samen de dienst uit gaan maken? Of, wordt dat het unieke domein van grote ketenregisseurs? Bepalen Mercedes-Benz European Transport Services, Google Retail en Deutsche Bank Holidays straks het wereldwijde speelveld?</span></p>&#13;
+&#13;
+<p><span>In de Rotterdamse haven gebruiken ze als centrale gegevensbank Portbase. Hierin staat alle informatie over de aankomende en vertrekkende containers. Dat is een nutsvoorziening die een gelijk speelveld voor alle transporteurs biedt. Elke transporteur mag zelf slimmer plannen met die data.</span></p>&#13;
+&#13;
+<a id="anchor-strongtransparantiestrong"></a><h2><strong>Transparantie</strong></h2>&#13;
+&#13;
+<p>Bedrijven laten miljarden liggen door geen data te delen. Niet met hun klanten en leveranciers, en al helemaal niet met hun collega&#8217;s. Ze vissen graag in troebel water. Dit verandert snel. Data delen is de nieuwe norm.</p>&#13;
+&#13;
+<p>Er is eigenlijk geen sector meer waar geen transparantie is. Dat zou wel eens heel bedreigend kunnen zijn voor juist het MKB.</p>&#13;
+&#13;
+<a id="anchor-strongmkbstrong"></a><h2><strong>MKB</strong></h2>&#13;
+&#13;
+<p>MKB-voorman Hans Biesheuvel zou &#8216;big data&#8217; hoog op de agenda moeten zetten. Hoe zorgt het MKB ervoor dat die big data tot meer democratie in de handel leidt en niet tot uitsluiting van partijen of zelfs monopolies.</p>&#13;
+&#13;
+<p>Wat is goed voor consumenten? Die big data zijn toch een beetje van ons allemaal. Zo&#8217;n discussie moet verder gaan dan wat juridische borrelpraat over <em>non-disclosure&#160;agreements</em> (nda's). Er is echt iets aan de hand.</p>&#13;
+&#13;
+<p><em>Walther Ploos van Amstel is docent logistiek aan de Hogeschool van Amsterdam en supply chain-expert bij TNO Mobiliteit en Logistiek. Volg Walther ook op&#160;<a href="https://twitter.com/Delaatstemeter" target="_blank">Twitter.com/Delaatstemeter</a>.</em></p>
+            <div class="copyright">
+    <span class="author">
+        Door: NUzakelijk
+    </span>
+</div>
+        </div>
+    </div>
+
+</div>
+<!-- block|article.body end -->
+
+
+    
+        <!-- block|divider start -->
+<div
+    id="block-288805"
+    data-id="block-288805"
+    data-position="4"
+    data-type="divider"
+    class="block divider "
+    data-vr-contentbox="block.divider.4"
+>
+    
+</div>
+<!-- block|divider end -->
+
+
+    
+        <!-- block|article.tags start -->
+<div
+    id="block-288807"
+    data-id="block-288807"
+    data-position="5"
+    data-type="article.tags"
+    class="block article tags "
+    data-vr-contentbox="block.article.tags.5"
+>
+    
+    <div class="block-wrapper">
+        
+            <div class="title">
+                Lees meer over:
+            </div>
+        
+        <div class="block-content">
+            
+                <a class="trackevent" href="/tag/Walther%20Ploos%20van%20Amstel"><span>Walther Ploos van Amstel</span></a>
+            
+            <div class="clear"></div>
+        </div>
+    </div>
+
+</div>
+<!-- block|article.tags end -->
+
+
+    
+        <!-- block|socialbar start -->
+<div
+    id="block-288809"
+    data-id="block-288809"
+    data-position="6"
+    data-type="socialbar"
+    class="block socialbar "
+    data-vr-contentbox="block.socialbar.6"
+>
+    <div class="block socialbar">
+    <div class="block-wrapper">
+        <div class="block-content spacious">
+            
+<div class="socialbar-wrapper with-counters">
+    <ul class="social-buttons">
+        <li class="nujij">
+            <a href="http://www.nujij.nl/jij.lynkx/?i=http%3A%2F%2Fmedia.nu.nl%2Fm%2Fm1nx1kuaxpgb.jpg&x=Walther+Ploos+van+Amstel&b=%27Big+data%27+zou+sectoren+minder+democratisch+kunnen+maken.+Mogen+MKB%27ers+straks+nog+wel+meedoen%3F&u=http%3A%2F%2Fwww.nu.nl%2Fzakelijk-opinie%2F3522522%2Fbig-data-als-bedreiging-mkb.html&t=%27Big+data%27+als+bedreiging+voor+het+MKB" rel="nofollow" target="_blank"  class="tracksocial" data-tracksocialtarget="http://www.nu.nl/zakelijk-opinie/3522522/big-data-als-bedreiging-mkb.html" data-tracksocialnetwork="nujij" data-tracksocialaction="send1">
+                <span class="counter">0</span>
+                <div class="social-button">
+                    <div class="button-content">
+                        <i class="fc fc-nujij"></i>
+                        <span class="socialtext">Reageer</span>
+                    </div>
+                </div>
+            </a>
+            <div class="clear"></div>
+        </li>
+        <li class="facebook first">
+            <a href="http://www.facebook.com/sharer.php?p%5Btitle%5D=%27Big+data%27+als+bedreiging+voor+het+MKB&p%5Burl%5D=http%3A%2F%2Fwww.nu.nl%2Fzakelijk-opinie%2F3522522%2Fbig-data-als-bedreiging-mkb.html&s=100&p%5Bimages%5D%5B0%5D=http%3A%2F%2Fmedia.nu.nl%2Fm%2Fm1nx1kuaxpgb_wd1280.jpg&p%5Bsummary%5D=%27Big+data%27+zou+sectoren+minder+democratisch+kunnen+maken.+Mogen+MKB%27ers+straks+nog+wel+meedoen%3F" rel="nofollow" target="_blank" class="tracksocial" data-tracksocialtarget="http://www.nu.nl/zakelijk-opinie/3522522/big-data-als-bedreiging-mkb.html" data-tracksocialnetwork="facebook" data-tracksocialaction="like">
+                <span class="counter">0</span>
+                <div class="social-button">
+                    <div class="button-content">
+                        <i class="fa fa-facebook"></i>
+                        <span class="socialtext">Share</span>
+                    </div>
+                </div>
+            </a>
+            <div class="clear"></div>
+        </li>
+        <li class="twitter">
+            <a href="http://twitter.com/intent/tweet/?url=http%3A%2F%2Fwww.nu.nl%2Fzakelijk-opinie%2F3522522%2Fbig-data-als-bedreiging-mkb.html&text=%27Big+data%27+als+bedreiging+voor+het+MKB&via=NUnl" rel="nofollow" target="_blank" class="tracksocial" data-tracksocialtarget="http://www.nu.nl/zakelijk-opinie/3522522/big-data-als-bedreiging-mkb.html" data-tracksocialnetwork="twitter" data-tracksocialaction="tweet">
+                <span class="counter">0</span>
+                <div class="social-button">
+                    <div class="button-content">
+                        <i class="fa fa-twitter"></i>
+                        <span class="socialtext">Tweet</span>
+                    </div>
+                </div>
+            </a>
+            <div class="clear"></div>
+        </li>
+        <li class="googleplus">
+            <a href="https://plus.google.com/share?url=http%3A%2F%2Fwww.nu.nl%2Fzakelijk-opinie%2F3522522%2Fbig-data-als-bedreiging-mkb.html" rel="nofollow" target="_blank"  class="tracksocial" data-tracksocialtarget="http://www.nu.nl/zakelijk-opinie/3522522/big-data-als-bedreiging-mkb.html" data-tracksocialnetwork="google" data-tracksocialaction="send">
+                <span class="counter">-</span>
+                <div class="social-button">
+                    <div class="button-content">
+                        <i class="fa fa-google-plus"></i>
+                        <span class="socialtext">1</span>
+                    </div>
+                </div>
+            </a>
+            <div class="clear"></div>
+        </li>
+        <li class="email last">
+            <a href="http://messagent.sanomadigital.nl/optiext/optiextension.dll?ID=dRGdHmKfgt3BAlnR%2BQ9vk_W5Lb69wkEmPBl9sZvXm2L8xXJZYeeXsfXVv7lxB9FE%2B0SGHjv5qOdbEhNtTQ&artikel_titel=&#39;Big data&#39; als bedreiging voor het MKB&onderwerp=http://www.nu.nl/zakelijk-opinie/3522522/big-data-als-bedreiging-mkb.html" rel="nofollow" target="_blank"  class="tracksocial" data-tracksocialtarget="http://www.nu.nl/zakelijk-opinie/3522522/big-data-als-bedreiging-mkb.html" data-tracksocialnetwork="email" data-tracksocialaction="send2">
+                <span class="counter">-</span>
+                <div class="social-button">
+                    <div class="button-content">
+                        <i class="fa fa-envelope"></i>
+                        <span class="socialtext">E-mail</span>
+                    </div>
+                </div>
+            </a>
+            <div class="clear"></div>
+        </li>
+    </ul>
+</div>
+<div class="clear"></div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- block|socialbar end -->
+
+
+    
+        <!-- block|divider start -->
+<div
+    id="block-288811"
+    data-id="block-288811"
+    data-position="7"
+    data-type="divider"
+    class="block divider "
+    data-vr-contentbox="block.divider.7"
+>
+    
+</div>
+<!-- block|divider end -->
+
+
+    
+        <!-- block|article.related start -->
+<div
+    id="block-288813"
+    data-id="block-288813"
+    data-position="8"
+    data-type="article.related"
+    class="block article related "
+    data-vr-contentbox="block.article.related.8"
+>
+    
+    <div class="block-wrapper contentlist list">
+        <div class="title"><h2>Gerelateerde artikelen</h2></div>
+        <div class="block-content">
+            <ul>
+                
+                    <li class="  ">
+    <a href="/zakelijk-opinie/3510875/elektrische-vrachtwagens-kip-of-ei.html" target="_self" class="trackevent">
+        <div class="content">
+            <div class="image">
+                <div class="svg-icon icon-s icon-nu">
+    <img src="/static/img/atoms/images/logos/logo-sprite.svg" />
+</div>
+            </div>
+            <span class="text-wrapper">
+                <span class="list-title">Elektrische vrachtwagens: kip of ei?</span>
+                <span class="mediaicons"><i class="mediaicon-slideshow"></i><i class="mediaicon-infographic"></i><i class="mediaicon-video"></i></span>
+
+                <span class="time">26-06-13</span>
+            </span>
+        </div>
+        <div class="clear"></div>
+    </a>
+</li>
+                
+                    <li class="  ">
+    <a href="/zakelijk-opinie/3498538/financiele-constipatie.html" target="_self" class="trackevent">
+        <div class="content">
+            <div class="image">
+                <div class="svg-icon icon-s icon-nu">
+    <img src="/static/img/atoms/images/logos/logo-sprite.svg" />
+</div>
+            </div>
+            <span class="text-wrapper">
+                <span class="list-title">Financiële constipatie</span>
+                <span class="mediaicons"><i class="mediaicon-slideshow"></i><i class="mediaicon-infographic"></i><i class="mediaicon-video"></i></span>
+
+                <span class="time">12-06-13</span>
+            </span>
+        </div>
+        <div class="clear"></div>
+    </a>
+</li>
+                
+                    <li class="  ">
+    <a href="/zakelijk-opinie/3486445/panama-go-west.html" target="_self" class="trackevent">
+        <div class="content">
+            <div class="image">
+                <div class="svg-icon icon-s icon-nu">
+    <img src="/static/img/atoms/images/logos/logo-sprite.svg" />
+</div>
+            </div>
+            <span class="text-wrapper">
+                <span class="list-title">Panama: Go West!</span>
+                <span class="mediaicons"><i class="mediaicon-slideshow"></i><i class="mediaicon-infographic"></i><i class="mediaicon-video"></i></span>
+
+                <span class="time">29-05-13</span>
+            </span>
+        </div>
+        <div class="clear"></div>
+    </a>
+</li>
+                
+                    <li class="  ">
+    <a href="/zakelijk-opinie/3465717/babymelkpoeder.html" target="_self" class="trackevent">
+        <div class="content">
+            <div class="image">
+                <div class="svg-icon icon-s icon-nu">
+    <img src="/static/img/atoms/images/logos/logo-sprite.svg" />
+</div>
+            </div>
+            <span class="text-wrapper">
+                <span class="list-title">Babymelkpoeder</span>
+                <span class="mediaicons"><i class="mediaicon-slideshow"></i><i class="mediaicon-infographic"></i><i class="mediaicon-video"></i></span>
+
+                <span class="time">15-05-13</span>
+            </span>
+        </div>
+        <div class="clear"></div>
+    </a>
+</li>
+                
+                    <li class="  ">
+    <a href="/zakelijk-opinie/3416428/rijgedrag.html" target="_self" class="trackevent">
+        <div class="content">
+            <div class="image">
+                <div class="svg-icon icon-s icon-nu">
+    <img src="/static/img/atoms/images/logos/logo-sprite.svg" />
+</div>
+            </div>
+            <span class="text-wrapper">
+                <span class="list-title">Rijgedrag</span>
+                <span class="mediaicons"><i class="mediaicon-slideshow"></i><i class="mediaicon-infographic"></i><i class="mediaicon-video"></i></span>
+
+                <span class="time">07-05-13</span>
+            </span>
+        </div>
+        <div class="clear"></div>
+    </a>
+</li>
+                
+            </ul>
+            <div class="clear"></div>
+        </div>
+    </div>
+
+
+</div>
+<!-- block|article.related end -->
+
+
+    
+        <!-- block|divider start -->
+<div
+    id="block-288815"
+    data-id="block-288815"
+    data-position="9"
+    data-type="divider"
+    class="block divider "
+    data-vr-contentbox="block.divider.9"
+>
+    
+</div>
+<!-- block|divider end -->
+
+
+    
+        <!-- block|cts start -->
+<div
+    id="block-288817"
+    data-id="block-288817"
+    data-position="10"
+    data-type="cts"
+    class="block cts "
+    data-vr-contentbox="block.cts.10"
+>
+    
+<div class="block-wrapper advertorial_2_center">
+    <div class="block-content">
+        
+            <div id="cts_78a5bb46f8e94ed0b14ada71cabe0a5b" class="cts-wrapper min320 set-block"><script type="text/javascript"> try {    if(min320) {        tagging.render("advertorial_2_center");    } } catch(err) {    console.log(err) } </script></div>
+        
+    </div>
+</div>
+</div>
+<!-- block|cts end -->
+
+
+    
+        <!-- block|cts start -->
+<div
+    id="block-288819"
+    data-id="block-288819"
+    data-position="11"
+    data-type="cts"
+    class="block cts "
+    data-vr-contentbox="block.cts.11"
+>
+    
+<div class="block-wrapper mbot_320">
+    <div class="block-content">
+        
+            <div id="cts_bd6079d2333a4b9781ae7a45dea2fabf" class="cts-wrapper min320 max480 set-block"><script type="text/javascript"> try {    if(min320 && max480) {        tagging.render("mbot_320");    } } catch(err) {    console.log(err) } </script></div>
+        
+    </div>
+</div>
+</div>
+<!-- block|cts end -->
+
+
+    
+        <!-- block|cts start -->
+<div
+    id="block-288821"
+    data-id="block-288821"
+    data-position="12"
+    data-type="cts"
+    class="block cts "
+    data-vr-contentbox="block.cts.12"
+>
+    
+<div class="block-wrapper ttxt_adv_468_200">
+    <div class="block-content">
+        
+            <div id="cts_2aec5f6c56fe406da2a9b943bed6cd5e" class="cts-wrapper min600 max992 set-block"><script type="text/javascript"> try {    if(min600 && max992) {        tagging.render("ttxt_adv_468_200");    } } catch(err) {    console.log(err) } </script></div>
+        
+    </div>
+</div>
+</div>
+<!-- block|cts end -->
+
+
+    
+        <!-- block|cts start -->
+<div
+    id="block-288823"
+    data-id="block-288823"
+    data-position="13"
+    data-type="cts"
+    class="block cts "
+    data-vr-contentbox="block.cts.13"
+>
+    
+<div class="block-wrapper dtxt_adv_468_200">
+    <div class="block-content">
+        
+            <div id="cts_80da86f200f741dd852cbfbedb77ed20" class="cts-wrapper min992 set-block"><script type="text/javascript"> try {    if(min992) {        tagging.render("dtxt_adv_468_200");    } } catch(err) {    console.log(err) } </script></div>
+        
+    </div>
+</div>
+</div>
+<!-- block|cts end -->
+
+
+    
+        <!-- block|articlelist start -->
+<div
+    id="block-288825"
+    data-id="block-288825"
+    data-position="14"
+    data-type="articlelist"
+    class="block articlelist "
+    data-vr-contentbox="block.articlelist.14"
+>
+    <div class=" section-nuzakelijk source-normal" data-forced-template="list">
+
+    
+        <div class="contentlist list">
+            <div class="block-wrapper">
+    
+    
+        <div class="block-title arrowed section-bgcolored">
+            <a href="/zakelijk-opinie" class="blockheader-link trackevent">
+                <h2>
+                    Eerdere berichten
+                </h2>
+            </a>
+        </div>
+    
+
+    <div class="block-content">
+        <ul>
+            
+                
+                    
+<li class="" data-vr-contentbox="articlelist.zakelijk-opinie.1">
+    <a href="/zakelijk-opinie/3940834/bedenk-eigen-donkervoort.html" class="trackevent" >
+        <div class="list-content section-after-colored">
+            <div class="list-image col-min320 set-block">
+
+                <noscript>
+                    <img src="http://media.nu.nl/m/m1oxhkean77x_std320.jpg" class="image" alt="&#39;No compromise. Volgens mij zou elke ondernemer dat motto moeten kiezen&#39;" />
+                </noscript>
+                <img data-src="http://media.nu.nl/m/m1oxhkean77x_std320.jpg" src="/static/img/placeholders/std320-o.png" class="image lazy-unveil" alt="&#39;No compromise. Volgens mij zou elke ondernemer dat motto moeten kiezen&#39;" />
+
+                <span class="ranking">1.</span>
+                
+                    <span class="coloured-banner banner">
+                        <span class="banner-title">OPINIE</span>
+                        
+                    </span>
+                
+            </div>
+
+            <div class="list-overlay">
+                <span class="info">
+                    
+                    <span class="timestamp">een uur geleden</span>
+                    <span class="section">Opinie</span>
+
+                    <span class="title-wrapper">
+                        
+                        <span class="title">Bedenk je eigen Donkervoort</span>
+                        <span class="mediaicons"><i class="mediaicon-slideshow"></i><i class="mediaicon-infographic"></i><i class="mediaicon-video"></i></span>
+
+                    </span>
+
+                    
+
+                    <span class="excerpt">Zakelijk succes begint met producten met een onderscheidend vermogen, en de koppigheid om geen compromissen te sluiten.</span>
+
+                    <span class="caption">'No compromise. Volgens mij zou elke ondernemer dat motto moeten kiezen'</span>
+
+                    <span class="time">
+                        
+                    </span>
+                    
+                </span>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </a>
+</li>
+                
+                    
+<li class="" data-vr-contentbox="articlelist.zakelijk-opinie.2">
+    <a href="/zakelijk-opinie/3938472/schone-stadsdistributie-start-bij-inkoop.html" class="trackevent" >
+        <div class="list-content section-after-colored">
+            <div class="list-image col-min320 set-block">
+
+                <noscript>
+                    <img src="http://media.nu.nl/m/m1nx0rqaor5j_std320.jpg" class="image" alt="Kan de bevoorrading van lokale overheden niet slimmer en schoner?" />
+                </noscript>
+                <img data-src="http://media.nu.nl/m/m1nx0rqaor5j_std320.jpg" src="/static/img/placeholders/std320-o.png" class="image lazy-unveil" alt="Kan de bevoorrading van lokale overheden niet slimmer en schoner?" />
+
+                <span class="ranking">2.</span>
+                
+                    <span class="coloured-banner banner">
+                        <span class="banner-title">OPINIE</span>
+                        
+                    </span>
+                
+            </div>
+
+            <div class="list-overlay">
+                <span class="info">
+                    
+                    <span class="timestamp">2 dagen,21 uren geleden</span>
+                    <span class="section">Opinie</span>
+
+                    <span class="title-wrapper">
+                        
+                        <span class="title">Schone stadsdistributie start bij inkoop</span>
+                        <span class="mediaicons"><i class="mediaicon-slideshow"></i><i class="mediaicon-infographic"></i><i class="mediaicon-video"></i></span>
+
+                    </span>
+
+                    
+
+                    <span class="excerpt">Lokale overheden behoren tot de grootste werkgevers in Nederland. Hun opleidingen, afdelingen en diensten zijn verspreid over honderden locaties in hun gemeente.</span>
+
+                    <span class="caption">Kan de bevoorrading van lokale overheden niet slimmer en schoner?</span>
+
+                    <span class="time">
+                        
+                    </span>
+                    
+                </span>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </a>
+</li>
+                
+                    
+<li class="" data-vr-contentbox="articlelist.zakelijk-opinie.3">
+    <a href="/zakelijk-opinie/3937307/ex-hockeyprof-loopt-als-beroepsprofiteur-lamp.html" class="trackevent" >
+        <div class="list-content section-after-colored">
+            <div class="list-image col-min320 set-block">
+
+                <noscript>
+                    <img src="http://media.nu.nl/m/m1mx6arakbdf_std320.jpg" class="image" alt="Nederland kent veel beroepsprofiteurs maar deze leert een wijze les" />
+                </noscript>
+                <img data-src="http://media.nu.nl/m/m1mx6arakbdf_std320.jpg" src="/static/img/placeholders/std320-o.png" class="image lazy-unveil" alt="Nederland kent veel beroepsprofiteurs maar deze leert een wijze les" />
+
+                <span class="ranking">3.</span>
+                
+                    <span class="coloured-banner banner">
+                        <span class="banner-title">OPINIE</span>
+                        
+                    </span>
+                
+            </div>
+
+            <div class="list-overlay">
+                <span class="info">
+                    
+                    <span class="timestamp">4 dagen,1 uur geleden</span>
+                    <span class="section">Opinie</span>
+
+                    <span class="title-wrapper">
+                        
+                        <span class="title">Ex-hockeyprof loopt als beroepsprofiteur tegen de lamp</span>
+                        <span class="mediaicons"><i class="mediaicon-slideshow"></i><i class="mediaicon-infographic"></i><i class="mediaicon-video"></i></span>
+
+                    </span>
+
+                    
+
+                    <span class="excerpt">Dit is een wordt-vervolgd-verhaal. Of eigenlijk een 'wordt achtervolgd'&nbsp;zoals u gaat lezen. Nederland kent nou eenmaal te veel beroepsprofiteurs, maar deze leert een wijze les.</span>
+
+                    <span class="caption">Nederland kent veel beroepsprofiteurs maar deze leert een wijze les</span>
+
+                    <span class="time">
+                        
+                    </span>
+                    
+                </span>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </a>
+</li>
+                
+                    
+<li class="" data-vr-contentbox="articlelist.zakelijk-opinie.4">
+    <a href="/zakelijk-opinie/3936365/2015-jaar-van-schaap.html" class="trackevent" >
+        <div class="list-content section-after-colored">
+            <div class="list-image col-min320 set-block">
+
+                <noscript>
+                    <img src="http://media.nu.nl/m/m1mx9p6afsil_std320.jpg" class="image" alt="&#39;Chinese aandelen zijn niet voor beleggers met een zwakke maag&#39;" />
+                </noscript>
+                <img data-src="http://media.nu.nl/m/m1mx9p6afsil_std320.jpg" src="/static/img/placeholders/std320-o.png" class="image lazy-unveil" alt="&#39;Chinese aandelen zijn niet voor beleggers met een zwakke maag&#39;" />
+
+                <span class="ranking">4.</span>
+                
+                    <span class="coloured-banner banner">
+                        <span class="banner-title">OPINIE</span>
+                        
+                    </span>
+                
+            </div>
+
+            <div class="list-overlay">
+                <span class="info">
+                    
+                    <span class="timestamp">5 dagen,1 uur geleden</span>
+                    <span class="section">Opinie</span>
+
+                    <span class="title-wrapper">
+                        
+                        <span class="title">2015; het jaar van het schaap?</span>
+                        <span class="mediaicons"><i class="mediaicon-slideshow"></i><i class="mediaicon-infographic"></i><i class="mediaicon-video"></i></span>
+
+                    </span>
+
+                    
+
+                    <span class="excerpt">Er zijn in China twee beurzen waar aandelen verhandeld kunnen worden: Shanghai aan de oostkust en Shenzhen in het zuiden.&nbsp;</span>
+
+                    <span class="caption">'Chinese aandelen zijn niet voor beleggers met een zwakke maag'</span>
+
+                    <span class="time">
+                        
+                    </span>
+                    
+                </span>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </a>
+</li>
+                
+                    
+<li class="" data-vr-contentbox="articlelist.zakelijk-opinie.5">
+    <a href="/zakelijk-opinie/3935249/hoeveel-salarissen-heb-jij.html" class="trackevent" >
+        <div class="list-content section-after-colored">
+            <div class="list-image col-min320 set-block">
+
+                <noscript>
+                    <img src="http://media.nu.nl/m/m1oxfbma9sei_std320.jpg" class="image" alt="Als je meer dan één inkomen hebt, heb je meer zekerheid. Maar hoe bereik je dat het beste? " />
+                </noscript>
+                <img data-src="http://media.nu.nl/m/m1oxfbma9sei_std320.jpg" src="/static/img/placeholders/std320-o.png" class="image lazy-unveil" alt="Als je meer dan één inkomen hebt, heb je meer zekerheid. Maar hoe bereik je dat het beste? " />
+
+                <span class="ranking">5.</span>
+                
+                    <span class="coloured-banner banner">
+                        <span class="banner-title">OPINIE</span>
+                        
+                    </span>
+                
+            </div>
+
+            <div class="list-overlay">
+                <span class="info">
+                    
+                    <span class="timestamp">1 week geleden</span>
+                    <span class="section">Opinie</span>
+
+                    <span class="title-wrapper">
+                        
+                        <span class="title">Hoeveel salarissen heb jij?</span>
+                        <span class="mediaicons"><i class="mediaicon-slideshow"></i><i class="mediaicon-infographic"></i><i class="mediaicon-video"></i></span>
+
+                    </span>
+
+                    
+
+                    <span class="excerpt">Wees niet afhankelijk van één baas, één product of één klant. Zorg voor een flexibel inkomen uit meerdere bronnen.</span>
+
+                    <span class="caption">Als je meer dan één inkomen hebt, heb je meer zekerheid. Maar hoe bereik je dat het beste? </span>
+
+                    <span class="time">
+                        
+                    </span>
+                    
+                </span>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </a>
+</li>
+                
+                    
+<li class="" data-vr-contentbox="articlelist.zakelijk-opinie.6">
+    <a href="/zakelijk-opinie/3933940/energiereuzen-20-kunnen-nog-heel-lang-mee.html" class="trackevent" >
+        <div class="list-content section-after-colored">
+            <div class="list-image col-min320 set-block">
+
+                <noscript>
+                    <img src="http://media.nu.nl/m/m1nxk3dao6kj_std320.jpg" class="image" alt="De tijd van megacentrales is voorbij, maar energiebedrijven hebben nog veel klanten die hen diep vertrouwen" />
+                </noscript>
+                <img data-src="http://media.nu.nl/m/m1nxk3dao6kj_std320.jpg" src="/static/img/placeholders/std320-o.png" class="image lazy-unveil" alt="De tijd van megacentrales is voorbij, maar energiebedrijven hebben nog veel klanten die hen diep vertrouwen" />
+
+                <span class="ranking">6.</span>
+                
+                    <span class="coloured-banner banner">
+                        <span class="banner-title">OPINIE</span>
+                        
+                    </span>
+                
+            </div>
+
+            <div class="list-overlay">
+                <span class="info">
+                    
+                    <span class="timestamp">1 week,1 dag geleden</span>
+                    <span class="section">Opinie</span>
+
+                    <span class="title-wrapper">
+                        
+                        <span class="title">Energiereuzen 2.0 kunnen nog heel lang mee</span>
+                        <span class="mediaicons"><i class="mediaicon-slideshow"></i><i class="mediaicon-infographic"></i><i class="mediaicon-video"></i></span>
+
+                    </span>
+
+                    
+
+                    <span class="excerpt">Op het Bloomberg New Energy Finance-forum over de toekomst van de traditionele energiebedrijven, deze week in Santpoort, zullen veel critici luidkeels het einde van de energiereuzen verkondigen. En dat is onzinnig.</span>
+
+                    <span class="caption">De tijd van megacentrales is voorbij, maar energiebedrijven hebben nog veel klanten die hen diep vertrouwen</span>
+
+                    <span class="time">
+                        
+                    </span>
+                    
+                </span>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </a>
+</li>
+                
+                    
+<li class="" data-vr-contentbox="articlelist.zakelijk-opinie.7">
+    <a href="/zakelijk-opinie/3930532/the-next-thing.html" class="trackevent" >
+        <div class="list-content section-after-colored">
+            <div class="list-image col-min320 set-block">
+
+                <noscript>
+                    <img src="http://media.nu.nl/m/m1mx9p6afsil_std320.jpg" class="image" alt="Feit is dat IT-giganten groot inzetten op het gebruik en de uitbreiding van de ‘Internet of Things’" />
+                </noscript>
+                <img data-src="http://media.nu.nl/m/m1mx9p6afsil_std320.jpg" src="/static/img/placeholders/std320-o.png" class="image lazy-unveil" alt="Feit is dat IT-giganten groot inzetten op het gebruik en de uitbreiding van de ‘Internet of Things’" />
+
+                <span class="ranking">7.</span>
+                
+                    <span class="coloured-banner banner">
+                        <span class="banner-title">OPINIE</span>
+                        
+                    </span>
+                
+            </div>
+
+            <div class="list-overlay">
+                <span class="info">
+                    
+                    <span class="timestamp">1 week,5 dagen geleden</span>
+                    <span class="section">Opinie</span>
+
+                    <span class="title-wrapper">
+                        
+                        <span class="title">The next thing</span>
+                        <span class="mediaicons"><i class="mediaicon-slideshow"></i><i class="mediaicon-infographic"></i><i class="mediaicon-video"></i></span>
+
+                    </span>
+
+                    
+
+                    <span class="excerpt">Internet is al lang niet meer alleen iets wat gebruikt wordt op een laptop of smartphone, maar ook in onze auto’s, de huiskamer en in kleding wordt al gebruik gemaakt van Internet.&nbsp;</span>
+
+                    <span class="caption">Feit is dat IT-giganten groot inzetten op het gebruik en de uitbreiding van de ‘Internet of Things’</span>
+
+                    <span class="time">
+                        
+                    </span>
+                    
+                </span>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </a>
+</li>
+                
+                    
+<li class="" data-vr-contentbox="articlelist.zakelijk-opinie.8">
+    <a href="/zakelijk-opinie/3931749/vogelpoep-en-grote-definitiespel.html" class="trackevent" >
+        <div class="list-content section-after-colored">
+            <div class="list-image col-min320 set-block">
+
+                <noscript>
+                    <img src="http://media.nu.nl/m/m1nx4tba8iip_std320.jpg" class="image" alt="Opinie" />
+                </noscript>
+                <img data-src="http://media.nu.nl/m/m1nx4tba8iip_std320.jpg" src="/static/img/placeholders/std320-o.png" class="image lazy-unveil" alt="Opinie" />
+
+                <span class="ranking">8.</span>
+                
+                    <span class="coloured-banner banner">
+                        <span class="banner-title">OPINIE</span>
+                        
+                    </span>
+                
+            </div>
+
+            <div class="list-overlay">
+                <span class="info">
+                    
+                    <span class="timestamp">1 week,3 dagen geleden</span>
+                    <span class="section">Opinie</span>
+
+                    <span class="title-wrapper">
+                        
+                        <span class="title">Vogelpoep en het grote definitiespel</span>
+                        <span class="mediaicons"><i class="mediaicon-slideshow"></i><i class="mediaicon-infographic"></i><i class="mediaicon-video"></i></span>
+
+                    </span>
+
+                    
+
+                    <span class="excerpt">De extra afdracht aan de EU is minder erg dan het lijkt. Het getuigt van het spelen met een aantal definities dat zowel voor- en nadelen biedt.</span>
+
+                    <span class="caption"></span>
+
+                    <span class="time">
+                        
+                    </span>
+                    
+                </span>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </a>
+</li>
+                
+                    
+<li class="" data-vr-contentbox="articlelist.zakelijk-opinie.9">
+    <a href="/zakelijk-opinie/3929865/quick-wins-webwinkels.html" class="trackevent" >
+        <div class="list-content section-after-colored">
+            <div class="list-image col-min320 set-block">
+
+                <noscript>
+                    <img src="http://media.nu.nl/m/m1oxgpval3ag_std320.jpg" class="image" alt="&#39;Technische verbeteringen maken vaak net het verschil tussen winst en verlies&#39;" />
+                </noscript>
+                <img data-src="http://media.nu.nl/m/m1oxgpval3ag_std320.jpg" src="/static/img/placeholders/std320-o.png" class="image lazy-unveil" alt="&#39;Technische verbeteringen maken vaak net het verschil tussen winst en verlies&#39;" />
+
+                <span class="ranking">9.</span>
+                
+                    <span class="coloured-banner banner">
+                        <span class="banner-title">OPINIE</span>
+                        
+                    </span>
+                
+            </div>
+
+            <div class="list-overlay">
+                <span class="info">
+                    
+                    <span class="timestamp">1 week,6 dagen geleden</span>
+                    <span class="section">Opinie</span>
+
+                    <span class="title-wrapper">
+                        
+                        <span class="title">Quick wins voor webwinkels</span>
+                        <span class="mediaicons"><i class="mediaicon-slideshow"></i><i class="mediaicon-infographic"></i><i class="mediaicon-video"></i></span>
+
+                    </span>
+
+                    
+
+                    <span class="excerpt">Probeer jij als webwinkelier de grote jongens te verslaan? Vergeet dan niet de quick wins.</span>
+
+                    <span class="caption">'Technische verbeteringen maken vaak net het verschil tussen winst en verlies'</span>
+
+                    <span class="time">
+                        
+                    </span>
+                    
+                </span>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </a>
+</li>
+                
+                    
+<li class="" data-vr-contentbox="articlelist.zakelijk-opinie.10">
+    <a href="/zakelijk-opinie/3927703/wijze-lessen-van-saaie-ondernemer.html" class="trackevent" >
+        <div class="list-content section-after-colored">
+            <div class="list-image col-min320 set-block">
+
+                <noscript>
+                    <img src="http://media.nu.nl/m/m1nxbl5a9afu_std320.jpg" class="image" alt="&#39;Maak je niet te druk over zaken waar je geen invloed op hebt&#39;" />
+                </noscript>
+                <img data-src="http://media.nu.nl/m/m1nxbl5a9afu_std320.jpg" src="/static/img/placeholders/std320-o.png" class="image lazy-unveil" alt="&#39;Maak je niet te druk over zaken waar je geen invloed op hebt&#39;" />
+
+                <span class="ranking">10.</span>
+                
+                    <span class="coloured-banner banner">
+                        <span class="banner-title">OPINIE</span>
+                        
+                    </span>
+                
+            </div>
+
+            <div class="list-overlay">
+                <span class="info">
+                    
+                    <span class="timestamp">2 weken,2 dagen geleden</span>
+                    <span class="section">Opinie</span>
+
+                    <span class="title-wrapper">
+                        
+                        <span class="title">De wijze lessen van een saaie ondernemer</span>
+                        <span class="mediaicons"><i class="mediaicon-slideshow"></i><i class="mediaicon-infographic"></i><i class="mediaicon-video"></i></span>
+
+                    </span>
+
+                    
+
+                    <span class="excerpt">Willem is rijk en succesvol. Hij oogt een beetje saai. Geen dikke auto, geen strak pak, geen afgetraind lichaam. Hij is niet te dik, maar ook niet bijster knap. En maar één keer getrouwd. Kun je met zo’n man de oorlog winnen van de harde concurrentie?</span>
+
+                    <span class="caption">'Maak je niet te druk over zaken waar je geen invloed op hebt'</span>
+
+                    <span class="time">
+                        
+                    </span>
+                    
+                </span>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </a>
+</li>
+                
+                    
+<li class="" data-vr-contentbox="articlelist.zakelijk-opinie.11">
+    <a href="/zakelijk-opinie/3926701/logistieke-lessen-van-nike.html" class="trackevent" >
+        <div class="list-content section-after-colored">
+            <div class="list-image col-min320 set-block">
+
+                <noscript>
+                    <img src="http://media.nu.nl/m/m1nx0rqaor5j_std320.jpg" class="image" alt="&#39;Je moet een beetje flirten met sales en denken in oplossingen in plaats van problemen&#39;" />
+                </noscript>
+                <img data-src="http://media.nu.nl/m/m1nx0rqaor5j_std320.jpg" src="/static/img/placeholders/std320-o.png" class="image lazy-unveil" alt="&#39;Je moet een beetje flirten met sales en denken in oplossingen in plaats van problemen&#39;" />
+
+                <span class="ranking">11.</span>
+                
+                    <span class="coloured-banner banner">
+                        <span class="banner-title">OPINIE</span>
+                        
+                    </span>
+                
+            </div>
+
+            <div class="list-overlay">
+                <span class="info">
+                    
+                    <span class="timestamp">2 weken,2 dagen geleden</span>
+                    <span class="section">Opinie</span>
+
+                    <span class="title-wrapper">
+                        
+                        <span class="title">Logistieke lessen van Nike</span>
+                        <span class="mediaicons"><i class="mediaicon-slideshow"></i><i class="mediaicon-infographic"></i><i class="mediaicon-video"></i></span>
+
+                    </span>
+
+                    
+
+                    <span class="excerpt">Nike heeft de Nederlandse Logistiek Prijs gewonnen. Wat kunnen andere bedrijven van Nike leren?</span>
+
+                    <span class="caption">'Je moet een beetje flirten met sales en denken in oplossingen in plaats van problemen'</span>
+
+                    <span class="time">
+                        
+                    </span>
+                    
+                </span>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </a>
+</li>
+                
+                    
+<li class="" data-vr-contentbox="articlelist.zakelijk-opinie.12">
+    <a href="/zakelijk-opinie/3926041/dus-niet-mooie-auto-koopt.html" class="trackevent" >
+        <div class="list-content section-after-colored">
+            <div class="list-image col-min320 set-block">
+
+                <noscript>
+                    <img src="http://media.nu.nl/m/m1mx6arakbdf_std320.jpg" class="image" alt="&#39;Als je een koop annuleert, zijn annuleringskosten natuurlijk volledig terecht&#39;" />
+                </noscript>
+                <img data-src="http://media.nu.nl/m/m1mx6arakbdf_std320.jpg" src="/static/img/placeholders/std320-o.png" class="image lazy-unveil" alt="&#39;Als je een koop annuleert, zijn annuleringskosten natuurlijk volledig terecht&#39;" />
+
+                <span class="ranking">12.</span>
+                
+                    <span class="coloured-banner banner">
+                        <span class="banner-title">OPINIE</span>
+                        
+                    </span>
+                
+            </div>
+
+            <div class="list-overlay">
+                <span class="info">
+                    
+                    <span class="timestamp">2 weken,3 dagen geleden</span>
+                    <span class="section">Opinie</span>
+
+                    <span class="title-wrapper">
+                        
+                        <span class="title">Dit is dus niet hoe je een mooie auto koopt</span>
+                        <span class="mediaicons"><i class="mediaicon-slideshow"></i><i class="mediaicon-infographic"></i><i class="mediaicon-video"></i></span>
+
+                    </span>
+
+                    
+
+                    <span class="excerpt">Dit verhaal begint enthousiast met een BMW 7 en een jonkvrouw, maar draait uit op fikse kosten en de verspreking van een huisvriend.</span>
+
+                    <span class="caption">'Als je een koop annuleert, zijn annuleringskosten natuurlijk volledig terecht'</span>
+
+                    <span class="time">
+                        
+                    </span>
+                    
+                </span>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </a>
+</li>
+                
+                    
+<li class="" data-vr-contentbox="articlelist.zakelijk-opinie.13">
+    <a href="/zakelijk-opinie/3924782/olie-vuur.html" class="trackevent" >
+        <div class="list-content section-after-colored">
+            <div class="list-image col-min320 set-block">
+
+                <noscript>
+                    <img src="http://media.nu.nl/m/m1mx9p6afsil_std320.jpg" class="image" alt="Forse daling die de olieprijs van de laatste vier maanden heeft grote invloed op schaliegasproducenten" />
+                </noscript>
+                <img data-src="http://media.nu.nl/m/m1mx9p6afsil_std320.jpg" src="/static/img/placeholders/std320-o.png" class="image lazy-unveil" alt="Forse daling die de olieprijs van de laatste vier maanden heeft grote invloed op schaliegasproducenten" />
+
+                <span class="ranking">13.</span>
+                
+                    <span class="coloured-banner banner">
+                        <span class="banner-title">OPINIE</span>
+                        
+                    </span>
+                
+            </div>
+
+            <div class="list-overlay">
+                <span class="info">
+                    
+                    <span class="timestamp">2 weken,5 dagen geleden</span>
+                    <span class="section">Opinie</span>
+
+                    <span class="title-wrapper">
+                        
+                        <span class="title">Olie op het vuur</span>
+                        <span class="mediaicons"><i class="mediaicon-slideshow"></i><i class="mediaicon-infographic"></i><i class="mediaicon-video"></i></span>
+
+                    </span>
+
+                    
+
+                    <span class="excerpt">Nog niet zo heel lang geleden hadden nog maar weinigen van schaliegas, schalieolie of ‘fracking’ gehoord. Toch is het in rap tempo één van de meest gebruikte energiebronnen in de Verenigde Staten geworden.</span>
+
+                    <span class="caption">Forse daling die de olieprijs van de laatste vier maanden heeft grote invloed op schaliegasproducenten</span>
+
+                    <span class="time">
+                        
+                    </span>
+                    
+                </span>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </a>
+</li>
+                
+                    
+<li class="" data-vr-contentbox="articlelist.zakelijk-opinie.14">
+    <a href="/zakelijk-opinie/3923705/managen-als-god.html" class="trackevent" >
+        <div class="list-content section-after-colored">
+            <div class="list-image col-min320 set-block">
+
+                <noscript>
+                    <img src="http://media.nu.nl/m/m1nxawsao3jt_std320.jpg" class="image" alt="&#39;Aldi hanteert de slogan ‘Hoge kwaliteit, lage prijs. Dit geldt niet voor hun managementstijl&#39;" />
+                </noscript>
+                <img data-src="http://media.nu.nl/m/m1nxawsao3jt_std320.jpg" src="/static/img/placeholders/std320-o.png" class="image lazy-unveil" alt="&#39;Aldi hanteert de slogan ‘Hoge kwaliteit, lage prijs. Dit geldt niet voor hun managementstijl&#39;" />
+
+                <span class="ranking">14.</span>
+                
+                    <span class="coloured-banner banner">
+                        <span class="banner-title">OPINIE</span>
+                        
+                    </span>
+                
+            </div>
+
+            <div class="list-overlay">
+                <span class="info">
+                    
+                    <span class="timestamp">3 weken geleden</span>
+                    <span class="section">Opinie</span>
+
+                    <span class="title-wrapper">
+                        
+                        <span class="title">Managen als God</span>
+                        <span class="mediaicons"><i class="mediaicon-slideshow"></i><i class="mediaicon-infographic"></i><i class="mediaicon-video"></i></span>
+
+                    </span>
+
+                    
+
+                    <span class="excerpt">Aldi hanteert de slogan ‘Hoge kwaliteit, lage prijs. Dit geldt zeker niet over de managementstijl bij deze grootgrutter. De kwaliteit hiervan is dramatisch en de prijs zeer hoog.</span>
+
+                    <span class="caption">'Aldi hanteert de slogan ‘Hoge kwaliteit, lage prijs. Dit geldt niet voor hun managementstijl'</span>
+
+                    <span class="time">
+                        
+                    </span>
+                    
+                </span>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </a>
+</li>
+                
+                    
+<li class="" data-vr-contentbox="articlelist.zakelijk-opinie.15">
+    <a href="/zakelijk-opinie/3922967/zzpers-armoedegrens-ja-duh.html" class="trackevent" >
+        <div class="list-content section-after-colored">
+            <div class="list-image col-min320 set-block">
+
+                <noscript>
+                    <img src="http://media.nu.nl/m/m1mx690apby1_std320.jpg" class="image" alt="&#39;Hou op met het afschilderen van zzp&#39;ers als armoedige schijnzelfstandigen&#39;" />
+                </noscript>
+                <img data-src="http://media.nu.nl/m/m1mx690apby1_std320.jpg" src="/static/img/placeholders/std320-o.png" class="image lazy-unveil" alt="&#39;Hou op met het afschilderen van zzp&#39;ers als armoedige schijnzelfstandigen&#39;" />
+
+                <span class="ranking">15.</span>
+                
+                    <span class="coloured-banner banner">
+                        <span class="banner-title">OPINIE</span>
+                        
+                    </span>
+                
+            </div>
+
+            <div class="list-overlay">
+                <span class="info">
+                    
+                    <span class="timestamp">3 weken,1 dag geleden</span>
+                    <span class="section">Opinie</span>
+
+                    <span class="title-wrapper">
+                        
+                        <span class="title">Zzp&#39;ers onder armoedegrens, ja duh</span>
+                        <span class="mediaicons"><i class="mediaicon-slideshow"></i><i class="mediaicon-infographic"></i><i class="mediaicon-video"></i></span>
+
+                    </span>
+
+                    
+
+                    <span class="excerpt">Met enige verbazing las ik in diverse media dat zzp'ers veel vaker onder de armoedegrens leven. Dat ze arm zijn maar genieten van hun werk. Ja duh, dat is toch logisch. Ik verklaar.</span>
+
+                    <span class="caption">'Hou op met het afschilderen van zzp'ers als armoedige schijnzelfstandigen'</span>
+
+                    <span class="time">
+                        
+                    </span>
+                    
+                </span>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </a>
+</li>
+                
+            
+        </ul>
+        <div class="clear"></div>
+    </div>
+    
+    <div class="block-footer">
+        
+            <a href="#" data-url="/block/json/articlelist?order_by=updated_at&amp;footer=ajax&amp;section=zakelijk-opinie&amp;title=Eerdere+berichten&amp;refresh=1&amp;advertorials=%5B%5D&amp;limit=30&amp;section_details=%7Bu%27geolocation%27%3A+None%2C+u%27meta_keywords%27%3A+None%2C+u%27intro_bgcolor%27%3A+None%2C+u%27is_archived%27%3A+False%2C+u%27excerpt%27%3A+u%27%27%2C+u%27radius%27%3A+None%2C+u%27logo_media_id%27%3A+None%2C+u%27counts%27%3A+%7B%7D%2C+u%27top_slug%27%3A+u%27economie%27%2C+u%27meta_description%27%3A+u%27%27%2C+u%27sidebar_position%27%3A+None%2C+u%27parent_slug%27%3A+u%27economie%27%2C+u%27type%27%3A+u%27default%27%2C+u%27titlebar_color%27%3A+None%2C+u%27media_id%27%3A+None%2C+u%27description%27%3A+u%27%27%2C+u%27style%27%3A+u%27nuzakelijk%27%2C+u%27slug%27%3A+u%27zakelijk-opinie%27%2C+u%27name%27%3A+u%27Opinie%27%2C+u%27titlebar_bgcolor%27%3A+None%2C+u%27intro_color%27%3A+None%2C+u%27articlehead_color%27%3A+None%2C+u%27position%27%3A+None%7D&amp;template=list&amp;offset=15&amp;show_tabs=0" class="ajax trackevent" data-trackeventlabel="loadmore">
+                <strong>Laad meer artikelen</strong>
+            </a>
+        
+    </div>
+
+</div>
+            <div class="clear"></div>
+        </div>
+    
+
+    <div class="clear"></div>
+</div>
+</div>
+<!-- block|articlelist end -->
+
+
+    <script type="text/javascript">
+        jQuery('#block-288825').data({"limit": 15, "offset": 0});
+    </script>
+
+    
+        <!-- block|cts start -->
+<div
+    id="block-288827"
+    data-id="block-288827"
+    data-position="15"
+    data-type="cts"
+    class="block cts "
+    data-vr-contentbox="block.cts.15"
+>
+    
+<div class="block-wrapper mtxt_adv_300_250">
+    <div class="block-content">
+        
+            <div id="cts_8624d08670724076b3d16d80d24995c5" class="cts-wrapper min280 max600 set-block"><script type="text/javascript"> try {    if(min280 && max600) {        tagging.render("mtxt_adv_300_250");    } } catch(err) {    console.log(err) } </script></div>
+        
+    </div>
+</div>
+</div>
+<!-- block|cts end -->
+
+
+    
+</div>
+<!-- zone|main end -->
+    
+
+
+                                    </div>
+                                </div>
+                            </div><!-- content -->
+                            <div class="column last">
+                                <div class="column-content">
+                                    <!-- zone|sidebar start -->
+<div class="zone" data-zone="sidebar" data-vr-zone="sidebar">
+    
+        <!-- block|mostcombination start -->
+<div
+    id="block-288829"
+    data-id="block-288829"
+    data-position="1"
+    data-type="mostcombination"
+    class="block mostcombination compact"
+    data-vr-contentbox="block.mostcombination.1"
+>
+    <div class="block-wrapper">
+    <div class="block-content">
+        <div class="tabs tabs2 fullwidth" data-tab-constrain="1">
+            <div class="tabtrigger">
+                <ul>
+                    <li class="active"><a href="" data-tab="1" class="trackevent" data-trackeventlabel="net_binnen">Net binnen</a></li>
+                    <li><a href="#" data-tab="2" class="trackevent" data-trackeventlabel="meest_gelezen">Meest gelezen</a></li>
+                    <div class="clear"></div>
+                </ul>
+                <div class="clear"></div>
+            </div>
+
+            <div class="clear"></div>
+
+
+            <div class="tab tab-1 active">
+                <!-- block|mostrecent start -->
+<div
+    id="block-7e07d6b0fff94f8b8930b75f53ce83eb"
+    data-id="block-7e07d6b0fff94f8b8930b75f53ce83eb"
+    data-position=""
+    data-type="mostrecent"
+    class="block mostrecent "
+    data-vr-contentbox="block.mostrecent"
+>
+    <div class="contentlist most-recent">
+    <div class="block-wrapper">
+        <div class="block-content">
+            <ul>
+                
+                    <li class="  " data-vr-contentbox="articlelist.ondernemen.1">
+                        <div class="list-content">
+                            <a href="/ondernemen/3940876/nederland-investeert-140-miljoen-in-europese-ruimtevaart.html" class="trackevent" >
+                                <div class="list-overlay">
+                                    <span class="info">
+                                        <span class="time">10:37</span>
+                                        <span class="title">Nederland investeert 140 miljoen in Europese ruimtevaart</span>
+                                        <span class="section">Ondernemen</span>
+                                    </span>
+                                </div>
+                            </a>
+                            <div class="clear"></div>
+                        </div>
+                    </li>
+                
+                    <li class="  " data-vr-contentbox="articlelist.media.2">
+                        <div class="list-content">
+                            <a href="/media/3940870/the-voice-of-holland-trekt-bijna-23-miljoen-kijkers.html" class="trackevent" >
+                                <div class="list-overlay">
+                                    <span class="info">
+                                        <span class="time">10:37</span>
+                                        <span class="title">The Voice of Holland trekt bijna 2,3 miljoen kijkers</span>
+                                        <span class="section">Media</span>
+                                    </span>
+                                </div>
+                            </a>
+                            <div class="clear"></div>
+                        </div>
+                    </li>
+                
+                    <li class="  " data-vr-contentbox="articlelist.economie.3">
+                        <div class="list-content">
+                            <a href="/economie/3940872/minder-dan-1-miljoen-arme-hongkong-chinezen.html" class="trackevent" >
+                                <div class="list-overlay">
+                                    <span class="info">
+                                        <span class="time">10:33</span>
+                                        <span class="title">Minder dan 1 miljoen arme Hongkong-Chinezen</span>
+                                        <span class="section">Economie</span>
+                                    </span>
+                                </div>
+                            </a>
+                            <div class="clear"></div>
+                        </div>
+                    </li>
+                
+                    <li class="  " data-vr-contentbox="articlelist.buitenland.4">
+                        <div class="list-content">
+                            <a href="/buitenland/3940867/egyptische-ex-president-mubarak-niet-veroordeeld-dood-betogers.html" class="trackevent" >
+                                <div class="list-overlay">
+                                    <span class="info">
+                                        <span class="time">10:15</span>
+                                        <span class="title">Egyptische ex-president Mubarak niet veroordeeld voor dood betogers</span>
+                                        <span class="section">Buitenland</span>
+                                    </span>
+                                </div>
+                            </a>
+                            <div class="clear"></div>
+                        </div>
+                    </li>
+                
+            </ul>
+            <div class="clear"></div>
+        </div>
+        
+        <div class="block-footer">
+            <a href="/net-binnen" class="footer-link trackevent section-after-colored">
+                <strong>Meer nieuws</strong>
+            </a>
+        </div>
+    </div>
+
+    <div class="clear"></div>
+</div>
+</div>
+<!-- block|mostrecent end -->
+
+
+    <script type="text/javascript">
+        jQuery('#block-7e07d6b0fff94f8b8930b75f53ce83eb').data({"limit": 4, "offset": 0});
+    </script>
+
+                <div class="clear"></div>
+            </div>
+
+            <div class="tab tab-2">
+                <!-- block|mostread start -->
+<div
+    id="block-108cc181e2cc46699ce8129f180de4f3"
+    data-id="block-108cc181e2cc46699ce8129f180de4f3"
+    data-position=""
+    data-type="mostread"
+    class="block mostread "
+    data-vr-contentbox="block.mostread"
+>
+    <div class="contentlist most-read">
+    <div class="block-wrapper">
+        <div class="block-content">
+            <ul>
+                
+                    <li class="  " data-vr-contentbox="articlelist.geldzaken.1">
+                        <div class="list-content">
+                            <a href="/geldzaken/3940804/staatsloterij-moet-beveiliging-trekkingssysteem-verbeteren.html" class="trackevent" >
+                                <div class="list-overlay">
+                                    <span class="info">
+                                        <span class="ranking">1.</span>
+                                        <span class="title">Staatsloterij moet beveiliging trekkingssysteem verbeteren</span>
+                                    </span>
+                                </div>
+                            </a>
+                            <div class="clear"></div>
+                        </div>
+                    </li>
+                
+                    <li class="  " data-vr-contentbox="articlelist.gezondheid.2">
+                        <div class="list-content">
+                            <a href="/gezondheid/3940807/ondervoeding-in-verpleeghuizen-hoge-werkdruk.html" class="trackevent" >
+                                <div class="list-overlay">
+                                    <span class="info">
+                                        <span class="ranking">2.</span>
+                                        <span class="title">&#39;Ondervoeding in verpleeghuizen door te hoge werkdruk&#39;</span>
+                                    </span>
+                                </div>
+                            </a>
+                            <div class="clear"></div>
+                        </div>
+                    </li>
+                
+                    <li class="  " data-vr-contentbox="articlelist.geldzaken.3">
+                        <div class="list-content">
+                            <a href="/geldzaken/3940828/duurdere-aanvullende-premies-ouderen.html" class="trackevent" >
+                                <div class="list-overlay">
+                                    <span class="info">
+                                        <span class="ranking">3.</span>
+                                        <span class="title">Duurdere aanvullende premies voor ouderen</span>
+                                    </span>
+                                </div>
+                            </a>
+                            <div class="clear"></div>
+                        </div>
+                    </li>
+                
+                    <li class="  " data-vr-contentbox="articlelist.selectie.4">
+                        <div class="list-content">
+                            <a href="/selectie/3940414/van-awbz-wlz-er-verandert-in-zorg-en-waarom.html" class="trackevent" >
+                                <div class="list-overlay">
+                                    <span class="info">
+                                        <span class="ranking">4.</span>
+                                        <span class="title">Van de AWBZ naar de Wlz: wat er verandert in de zorg en waarom</span>
+                                    </span>
+                                </div>
+                            </a>
+                            <div class="clear"></div>
+                        </div>
+                    </li>
+                
+            </ul>
+            <div class="clear"></div>
+        </div>
+        
+        <div class="block-footer">
+            <a href="/meest-gelezen" class="footer-link trackevent section-after-colored">
+                <strong>Meer nieuws</strong>
+            </a>
+        </div>
+    </div>
+
+    <div class="clear"></div>
+</div>
+</div>
+<!-- block|mostread end -->
+
+
+    <script type="text/javascript">
+        jQuery('#block-108cc181e2cc46699ce8129f180de4f3').data({"limit": 4, "offset": 0});
+    </script>
+
+                <div class="clear"></div>
+            </div>
+
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- block|mostcombination end -->
+
+
+    
+        <!-- block|cts start -->
+<div
+    id="block-288831"
+    data-id="block-288831"
+    data-position="2"
+    data-type="cts"
+    class="block cts compact"
+    data-vr-contentbox="block.cts.2"
+>
+    
+<div class="block-wrapper dmid_300_h300">
+    <div class="block-content">
+        
+            <div id="cts_46e9736a2316439cb9c11c2e4dc928b7" class="cts-wrapper min768 max992 set-block"><script type="text/javascript"> try {    if(min768 && max992) {        tagging.render("dmid_300_h300");    } } catch(err) {    console.log(err) } </script></div>
+        
+    </div>
+</div>
+</div>
+<!-- block|cts end -->
+
+
+    
+        <!-- block|cts start -->
+<div
+    id="block-288833"
+    data-id="block-288833"
+    data-position="3"
+    data-type="cts"
+    class="block cts compact"
+    data-vr-contentbox="block.cts.3"
+>
+    
+<div class="block-wrapper dmid_300_h300_336">
+    <div class="block-content">
+        
+            <div id="cts_96d54c8b03d34df3a1bdbdf8e3a0767e" class="cts-wrapper min992 set-block"><script type="text/javascript"> try {    if(min992) {        tagging.render("dmid_300_h300_336");    } } catch(err) {    console.log(err) } </script></div>
+        
+    </div>
+</div>
+</div>
+<!-- block|cts end -->
+
+
+    
+        <!-- block|cts start -->
+<div
+    id="block-288835"
+    data-id="block-288835"
+    data-position="4"
+    data-type="cts"
+    class="block cts compact"
+    data-vr-contentbox="block.cts.4"
+>
+    
+<div class="block-wrapper advertorial_1_rechts">
+    <div class="block-content">
+        
+            <div id="cts_432c0df569ed4013b540cffc6cf1fcae" class="cts-wrapper min480 set-block"><script type="text/javascript"> try {    if(min480) {        tagging.render("advertorial_1_rechts");    } } catch(err) {    console.log(err) } </script></div>
+        
+    </div>
+</div>
+</div>
+<!-- block|cts end -->
+
+
+    
+        <!-- block|highlight start -->
+<div
+    id="block-288837"
+    data-id="block-288837"
+    data-position="5"
+    data-type="highlight"
+    class="block highlight compact"
+    data-vr-contentbox="block.highlight.5"
+>
+    
+</div>
+<!-- block|highlight end -->
+
+
+    
+        <!-- block|highlight start -->
+<div
+    id="block-288839"
+    data-id="block-288839"
+    data-position="6"
+    data-type="highlight"
+    class="block highlight compact"
+    data-vr-contentbox="block.highlight.6"
+>
+    
+</div>
+<!-- block|highlight end -->
+
+
+    
+        <!-- block|highlight start -->
+<div
+    id="block-288841"
+    data-id="block-288841"
+    data-position="7"
+    data-type="highlight"
+    class="block highlight compact"
+    data-vr-contentbox="block.highlight.7"
+>
+    
+</div>
+<!-- block|highlight end -->
+
+
+    
+        <!-- block|cts start -->
+<div
+    id="block-288843"
+    data-id="block-288843"
+    data-position="8"
+    data-type="cts"
+    class="block cts compact"
+    data-vr-contentbox="block.cts.8"
+>
+    
+<div class="block-wrapper dmid_300_p2">
+    <div class="block-content">
+        
+            <div id="cts_1d9a4e912a354ac3910622a315016373" class="cts-wrapper min768 max992 set-block"><script type="text/javascript"> try {    if(min768 && max992) {        tagging.render("dmid_300_p2");    } } catch(err) {    console.log(err) } </script></div>
+        
+    </div>
+</div>
+</div>
+<!-- block|cts end -->
+
+
+    
+        <!-- block|cts start -->
+<div
+    id="block-288845"
+    data-id="block-288845"
+    data-position="9"
+    data-type="cts"
+    class="block cts compact"
+    data-vr-contentbox="block.cts.9"
+>
+    
+<div class="block-wrapper dmid_300_336_p2">
+    <div class="block-content">
+        
+            <div id="cts_cee28b78594a497e8dca1e6eef293a5a" class="cts-wrapper min992 set-block"><script type="text/javascript"> try {    if(min992) {        tagging.render("dmid_300_336_p2");    } } catch(err) {    console.log(err) } </script></div>
+        
+    </div>
+</div>
+</div>
+<!-- block|cts end -->
+
+
+    
+</div>
+<!-- zone|sidebar end -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                        <!-- zone|footer start -->
+<div class="zone" data-zone="footer" data-vr-zone="footer">
+    
+        <!-- block|cts start -->
+<div
+    id="block-288847"
+    data-id="block-288847"
+    data-position="1"
+    data-type="cts"
+    class="block cts "
+    data-vr-contentbox="block.cts.1"
+>
+    
+<div class="block-wrapper dbot_468">
+    <div class="block-content">
+        
+            <div id="cts_2ce02cbc4c84421595bef26c8f0694d0" class="cts-wrapper min480 max768 set-block"><script type="text/javascript"> try {    if(min480 && max768) {        tagging.render("dbot_468");    } } catch(err) {    console.log(err) } </script></div>
+        
+    </div>
+</div>
+</div>
+<!-- block|cts end -->
+
+
+    
+        <!-- block|cts start -->
+<div
+    id="block-288849"
+    data-id="block-288849"
+    data-position="2"
+    data-type="cts"
+    class="block cts "
+    data-vr-contentbox="block.cts.2"
+>
+    
+<div class="block-wrapper dbot_728">
+    <div class="block-content">
+        
+            <div id="cts_337bdcc4dcd7436facd4e670ceb21281" class="cts-wrapper min768 set-block"><script type="text/javascript"> try {    if(min768) {        tagging.render("dbot_728");    } } catch(err) {    console.log(err) } </script></div>
+        
+    </div>
+</div>
+</div>
+<!-- block|cts end -->
+
+
+    
+</div>
+<!-- zone|footer end -->
+
+                    </div><!-- main -->
+                    <div class="clear"></div>
+
+                </div><!-- content_container -->
+                <div class="clear"></div>
+
+            </div><!-- container -->
+
+            
+                <!-- zone|body_bottom start -->
+<div class="zone" data-zone="body_bottom" data-vr-zone="body_bottom">
+    
+</div>
+<!-- zone|body_bottom end -->
+                <div class="block footer">
+    <div class="block-wrapper">
+        <div class="block-content">
+
+            <div class="footer-wrapper">
+                <div class="footer-logo">
+                    <div class="svg-icon icon-l icon-">
+                        <img src="/static/img/atoms/images/logos/logo-sprite.svg" />
+                    </div>
+                </div>
+
+                <div class="footer-info">
+                    <span class="publisher-credits">
+                        &copy; 2014 Sanoma Digital The Netherlands B.V.
+                        NU - onderdeel van <a href="http://www.sanoma.com" class="trackevent" data-trackeventaction="page-footer">Sanoma Media Netherlands Group</a>
+                    </span>
+                    <div class="block-col first">
+                        <ul class="inline">
+                            <li class="first"><a href="/colofon.html" class="trackevent" data-trackeventaction="page-footer">Colofon</a></li>
+                            <li><a href="/copyright.html" class="trackevent" data-trackeventaction="page-footer">Copyright</a></li>
+                            <li><a href="/disclaimer.html" class="trackevent" data-trackeventaction="page-footer">Disclaimer</a></li>
+                            <li><a href="/privacy-en-cookiebeleid.html" class="trackevent" data-trackeventaction="page-footer">Privacy en cookiebeleid</a></li>
+                            
+                            <li class="last"><a href="http://www.sanoma.nl/merken/artikel/nunl/digital/merk-profiel/" class="trackevent" data-trackeventaction="page-footer">Adverteren</a></li>
+                        </ul>
+                    </div>
+                    <div class="block-col last">
+                        <ul class="social-badges">
+    
+        <li class="facebook"><a href="http://www.facebook.com/NUnl" target="_blank" class="trackevent"><i class="fa fa-facebook fa-lg"></i></a></li>
+    
+    
+        <li class="twitter"><a href="http://www.twitter.com/NUnl" target="_blank" class="trackevent"><i class="fa fa-twitter fa-lg"></i></a></li>
+    
+    
+        <li class="googleplus"><a href="http://plus.google.com/+NUnl" target="_blank" class="trackevent"><i class="fa fa-google-plus fa-fa-lg"></i></a></li>
+    
+    
+        <li class="rss"><a href="/rss/zakelijk-opinie" target="_blank" class="trackevent"><i class="fa fa-rss fa-lg"></i></a></li>
+    
+</ul>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+</div>
+            
+
+            <script type="text/javascript"> try {    if(true) {        tagging.render("footer");    } } catch(err) {    console.log(err) } </script>
+
+            
+
+<script type="text/javascript" src="/static/CACHE/js/61fa2a79f142.js"></script>
+
+<!-- BLOCK JS -->
+<script type="text/javascript" src="/static/CACHE/js/91d2e7aeb41c.js"></script>
+            <div class="clear"></div>
+        </div><!-- wrapper -->
+        
+        <div class="modal-overlay"></div>
+    </body>
+</html>
