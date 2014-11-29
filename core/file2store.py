@@ -2,7 +2,10 @@
 
 from pymongo import MongoClient
 import sys
+import re
 
+url = ''
+files = []
 filename = sys.argv[1]
 try:
     year = sys.argv[2]
@@ -17,8 +20,20 @@ client = MongoClient()
 db = client.crawler  # use a database called boundaries to store json
 collection = db.web   # and inside that DB, a collection called web
 
-f = open(filename)  # open a file
-text = f.read()    # read the entire contents, should be UTF-8 text
-f.close()
+files.append(filename)
 
-print text
+for filename in files:
+    with open(filename, 'r') as f:
+        filetext = f.readlines()
+    url = ''
+    match = re.search('Monitorix-url: (\S+)', filetext[0])
+    url = match.group(1)
+
+    text = str(filetext)
+
+    if url:
+	print url
+        # build a document to be inserted
+        text_file_doc = {"year": year, "country": country, "file_name": filename, "json" : text }
+        collection.insert(text_file_doc)
+
