@@ -1,0 +1,3 @@
+wget http://www.nu.nl/opinie/3837228/big-data-bedreigt-nederland-dienstenland.html -O test1.html
+wget http://www.nu.nl/zakelijk-opinie/3670392/big-data-niets-waard.html -O test2.html
+wget http://www.nu.nl/zakelijk-opinie/3522522/big-data-als-bedreiging-mkb.html -O test3.html
