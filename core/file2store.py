@@ -3,10 +3,27 @@
 from pymongo import MongoClient
 import sys
 import re
+import getopt
+import os
+
+filename = ''
+options, remainder = getopt.getopt(sys.argv[1:], 'o:vf:d:', ['filename=', 
+                                                         'verbose',
+                                                         'version=',
+						 	 'directory='
+                                                         ])
+for opt, arg in options:
+    if opt in ('-d', '--directory'):
+        dir = arg
+    if opt in ('-f', '--filename'):
+        filename = arg
+    elif opt in ('-v', '--verbose'):
+        verbose = True
+    elif opt == '--version':
+        version = arg
 
 url = ''
 files = []
-filename = sys.argv[1]
 try:
     year = sys.argv[2]
 except:
@@ -20,7 +37,12 @@ client = MongoClient()
 db = client.crawler  # use a database called boundaries to store json
 collection = db.web   # and inside that DB, a collection called web
 
-files.append(filename)
+if filename:
+    files.append(filename)
+if dir:
+    for f in os.listdir(dir):
+	fullpath = dir + '/' + f
+	files.append(fullpath)
 
 for filename in files:
     with open(filename, 'r') as f:
