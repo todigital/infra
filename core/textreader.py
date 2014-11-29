@@ -5,22 +5,19 @@ from BeautifulSoup import BeautifulSoup
 filename1 = sys.argv[1]
 filename2 = sys.argv[2]
 
-f = open(filename1)  # open a file
-text = f.read()    # read the entire contents, should be UTF-8 text
-f.close()
+with open(filename1, 'r') as f:
+    filetext1 = f.readlines()
+with open(filename2, 'r') as f:
+    filetext2 = f.readlines()
 
-import urllib2
-from BeautifulSoup import BeautifulSoup
-
-def text_processor(filename, idealmodel, debug):
+def text_processor(htmlstrings, idealmodel, debug):
     result = {}
     structure = []
     fulltext = []
-    soup = BeautifulSoup(text)
     
-    with open(filename) as fp:
+    if htmlstrings:
         lineID = 0
-        for line in fp:
+        for line in htmlstrings:
             lenstr = len(line)
             words = len(line.split())
             comas = len(line.split(","))
@@ -50,7 +47,7 @@ def text_processor(filename, idealmodel, debug):
                             true = 0
                             
                         if true:
-                            fulltext.append(str(lineID) + ' ' + str(htmltags) + ' ' + code + ' ' + line)
+                            fulltext.append(str(lineID) + ' ' + str(htmltags) + ' ' + code + '\n' + line)
                         else:
                             fulltext.append('')
                 
@@ -73,8 +70,8 @@ def text_processor(filename, idealmodel, debug):
  
 idealmodel = ''
 debug = 0
-(htmltest, structure, fulltext) = text_processor(filename1, idealmodel, debug)
-(htmltest, structure, fulltext) = text_processor(filename2, htmltest, '')
+(htmltest, structure, fulltext) = text_processor(filetext1, idealmodel, debug)
+(htmltest, structure, fulltext) = text_processor(filetext2, htmltest, '')
 for line in fulltext:
     if line:
         print line
