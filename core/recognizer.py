@@ -7,7 +7,17 @@ def text_processor(htmlstrings, idealmodel, debug):
     result = {}
     structure = []
     fulltext = []
+    title = ''
+    attributes = {}
     
+    # find title
+    soup = BeautifulSoup(str(htmlstrings))
+    title = soup.title.string
+    attributes['title'] = title
+    soup.findAll(attrs={"name":"description"})
+    attributes['meta:description'] = str(soup.findAll(attrs={"name":"description"}))
+    attributes['meta:keywords'] = str(soup.findAll(attrs={"name":"keywords"}))
+
     if htmlstrings:
         lineID = 0
         for line in htmlstrings:
@@ -40,7 +50,7 @@ def text_processor(htmlstrings, idealmodel, debug):
                             true = 0
                             
                         if true:
-                            fulltext.append(str(lineID) + ' ' + str(htmltags) + ' ' + code + '\n' + line)
+                            fulltext.append(line)
                         else:
                             fulltext.append('')
                 
@@ -59,4 +69,4 @@ def text_processor(htmlstrings, idealmodel, debug):
                     print 'STATS' + str(htmltags) + ' ' + '[' + code + '] '
                     print 'TXT' + ' ' + line
             lineID = lineID + 1
-    return (result, structure, fulltext)
+    return (result, structure, fulltext, attributes)
