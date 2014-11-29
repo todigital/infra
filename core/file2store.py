@@ -7,6 +7,7 @@ import getopt
 import os
 
 filename = ''
+folder = ''
 options, remainder = getopt.getopt(sys.argv[1:], 'o:vf:d:', ['filename=', 
                                                          'verbose',
                                                          'version=',
@@ -14,7 +15,7 @@ options, remainder = getopt.getopt(sys.argv[1:], 'o:vf:d:', ['filename=',
                                                          ])
 for opt, arg in options:
     if opt in ('-d', '--directory'):
-        dir = arg
+        folder = arg
     if opt in ('-f', '--filename'):
         filename = arg
     elif opt in ('-v', '--verbose'):
@@ -39,9 +40,10 @@ collection = db.web   # and inside that DB, a collection called web
 
 if filename:
     files.append(filename)
-if dir:
-    for f in os.listdir(dir):
-	fullpath = dir + '/' + f
+if folder:
+    print folder 
+    for f in os.listdir(folder):
+	fullpath = folder + '/' + f
 	files.append(fullpath)
 
 for filename in files:
@@ -56,6 +58,9 @@ for filename in files:
     if url:
 	print url
         # build a document to be inserted
-        text_file_doc = {"year": year, "country": country, "file_name": filename, "json" : text }
-        collection.insert(text_file_doc)
+	try:
+            text_file_doc = {"year": year, "country": country, "file_name": filename, "json" : text }
+            collection.insert(text_file_doc)
+	except:
+	    print "Can't insert " + url
 
