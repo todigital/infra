@@ -44,7 +44,13 @@ for docid in db:
 	if showline:
 	    thisfield = field
 	    replaced = item[field]
+	    removehtml = ''
 	    if thisfield == 'json':
+		removehtml = 1
+	    if thisfield == 'content':
+		removehtml = 1
+
+	    if removehtml:
 		s = item[field]
 	        replaced = re.sub('<', '&lt;', s)
 		replaced = re.sub('>', '&gt;', replaced)
