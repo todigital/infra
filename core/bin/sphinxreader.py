@@ -17,6 +17,7 @@ print "	<sphinx:field name=\"url\" attr=\"string\" />"
 print "	<sphinx:attr name=\"year\" type=\"string\"/>"
 print " <sphinx:attr name=\"file_name\" type=\"string\"/>"
 print " <sphinx:attr name=\"json\" type=\"string\"/>"
+print " <sphinx:attr name=\"_id\" type=\"string\"/>"
 print "	</sphinx:schema>"
 
 id = 0
@@ -27,7 +28,7 @@ for docid in db:
     print "	<sphinx:document id=\"" + str(id) + "\">"
     for field in item:
 	showline = 1
-	if field == '_id':
+	if field == '_id1':
 	    showline = 0
 	if field == 'json1':
 	    showline = 0
