@@ -11,14 +11,17 @@ filename = ''
 folder = ''
 
 s = Server('http://127.0.0.1:5984/')
-options, remainder = getopt.getopt(sys.argv[1:], 'o:vf:d:', ['filename=', 
+options, remainder = getopt.getopt(sys.argv[1:], 'o:vf:d:D:', ['filename=', 
                                                          'verbose',
                                                          'version=',
 						 	 'directory='
+							 'date='
                                                          ])
 for opt, arg in options:
     if opt in ('-d', '--directory'):
         folder = arg
+    if opt in ('-D', '--date'):
+        date = arg
     if opt in ('-f', '--filename'):
         filename = arg
     elif opt in ('-v', '--verbose'):
@@ -37,7 +40,10 @@ try:
 except:
     country = 'NLD'
 
-database = 'testnl'
+database = 'nl'
+if date:
+    database = database + '_' + date
+print database
 try:
     db = s.create(database)
 except:
@@ -62,5 +68,5 @@ for filename in files:
 
     if url:
         # build a document to be inserted
-	text_file_doc = {"_id": uuid4().hex, "year": year, "country": country, "file_name": filename, "json" : text, "url": url }
+	text_file_doc = {"_id": uuid4().hex, "year": year, "country": country, "file_name": filename, "content" : text, "url": url }
 	db.create(text_file_doc)
