@@ -2,10 +2,15 @@
 
 from couchdb import *
 import re
+import sys
 s = Server('http://127.0.0.1:5984/')
 
 # default database
 database = 'nltest'
+day = sys.argv[1]
+if day:
+    #nl_20141203
+    database = "nl_" + day
 db = s[database]
 
 print "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
