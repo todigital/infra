@@ -22,6 +22,7 @@ print "	<sphinx:field name=\"url\" attr=\"string\" />"
 print "	<sphinx:attr name=\"year\" type=\"string\"/>"
 print " <sphinx:attr name=\"file_name\" type=\"string\"/>"
 print " <sphinx:attr name=\"json\" type=\"string\"/>"
+print " <sphinx:attr name=\"content\" type=\"string\"/>"
 print " <sphinx:attr name=\"_id\" type=\"string\"/>"
 print "	</sphinx:schema>"
 
