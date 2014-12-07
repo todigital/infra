@@ -8,7 +8,6 @@ db = s[database]
 
 for docid in db:
     item = db.get(docid)
-    try:
-        print item['url']
-    except:
-	print item['url']
+    for field in item:
+	if field != 'json':
+            print field + ': ' + item[field]
