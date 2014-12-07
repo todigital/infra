@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
-from pymongo import MongoClient
+from couchdb import *
+from uuid import uuid4
 import sys
 import re
 import getopt
@@ -8,6 +9,8 @@ import os
 
 filename = ''
 folder = ''
+
+s = Server('http://127.0.0.1:5984/')
 options, remainder = getopt.getopt(sys.argv[1:], 'o:vf:d:', ['filename=', 
                                                          'verbose',
                                                          'version=',
@@ -34,9 +37,11 @@ try:
 except:
     country = 'NLD'
 
-client = MongoClient()
-db = client.crawler  # use a database called boundaries to store json
-collection = db.web   # and inside that DB, a collection called web
+database = 'testnl'
+try:
+    db = s.create(database)
+except:
+    db = s[database]
 
 if filename:
     files.append(filename)
@@ -56,11 +61,6 @@ for filename in files:
     text = str(filetext)
 
     if url:
-	print url
         # build a document to be inserted
-	try:
-            text_file_doc = {"year": year, "country": country, "file_name": filename, "json" : text }
-            collection.insert(text_file_doc)
-	except:
-	    print "Can't insert " + url
-
+	text_file_doc = {"_id": uuid4().hex, "year": year, "country": country, "file_name": filename, "json" : text, "url": url }
+	db.create(text_file_doc)
