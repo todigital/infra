@@ -43,16 +43,19 @@ for docid in db:
 
 	if showline:
 	    thisfield = field
+	    replaced = item[field]
 	    if thisfield == 'json':
 		s = item[field]
 	        replaced = re.sub('<', '&lt;', s)
 		replaced = re.sub('>', '&gt;', replaced)
 		replaced = re.sub('&', '&amp;', replaced)
-	 	item[field] = replaced
+		if replaced:
+	 	    item[field] = replaced
 	    if thisfield == 'url':
 		s = item[field]
 	        replaced = re.sub('&', '&amp;', replaced)
-                item[field] = replaced
+		if replaced:
+                    item[field] = replaced
             print "	<" + field + '>' + item[field] + "</" + field + ">"
     print "	</sphinx:document>"
 print "</sphinx:docset>"
