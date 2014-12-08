@@ -29,8 +29,8 @@ print "	</sphinx:schema>"
 id = 0
 # Create XML
 for docid in db:
-    item = db.get(docid)
     try:
+	item = db.get(docid)
         id = id + 1
         print "	<sphinx:document id=\"" + str(id) + "\">"
         for field in item:
