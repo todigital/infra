@@ -2,6 +2,7 @@
 
 from couchdb import *
 from uuid import uuid4
+import codecs
 import sys
 import re
 import getopt
@@ -11,7 +12,8 @@ filename = ''
 folder = ''
 
 s = Server('http://127.0.0.1:5984/')
-options, remainder = getopt.getopt(sys.argv[1:], 'o:vf:d:D:', ['filename=', 
+options, remainder = getopt.getopt(sys.argv[1:], 'o:vf:d:D:l:', ['filename=', 
+							 'lang=',
                                                          'verbose',
                                                          'version=',
 						 	 'directory='
@@ -22,6 +24,8 @@ for opt, arg in options:
         folder = arg
     if opt in ('-D', '--date'):
         date = arg
+    if opt in ('-l', '--lang'):
+	lang = arg
     if opt in ('-f', '--filename'):
         filename = arg
     elif opt in ('-v', '--verbose'):
@@ -41,12 +45,16 @@ except:
     country = 'NLD'
 
 database = 'nl'
+if lang:
+    database = lang
 if date:
     database = database + '_' + date
 print database
 try:
     db = s.create(database)
 except:
+    #s.delete(database)
+    #db = s.create(database)
     db = s[database]
 
 if filename:
@@ -58,13 +66,16 @@ if folder:
 	files.append(fullpath)
 
 for filename in files:
-    with open(filename, 'r') as f:
-        filetext = f.readlines()
     url = ''
-    match = re.search('Monitorix-url: (\S+)', filetext[0])
-    url = match.group(1)
-
-    text = str(filetext)
+    text = '' 
+    try:
+        f = codecs.open(filename, "r", "utf-8")
+        filetext = f.read()
+        match = re.search('Monitorix-url: (\S+)', filetext)
+        url = match.group(1)
+	text = str(filetext)
+    except:
+	skip = 1
 
     if url:
         # build a document to be inserted
