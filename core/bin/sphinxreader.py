@@ -7,16 +7,21 @@ import time
 s = Server('http://127.0.0.1:5984/')
 
 # default database
+dbs = []
 database = 'nltest'
 userdb = sys.argv[1]
 if userdb == 'ua':
     date = time.strftime("%Y%m%d")
     hour = time.strftime("%H")
     database = userdb + '_' + date + '_' + hour
+    if int(hour):
+	hour = int(hour) - 1
+	hour = "%02d" % (hour)
+	database = userdb + '_' + date + '_' + hour
+	dbs.append(database)
 else:
     database = userdb
-
-db = s[database]
+    dbs.append(database)
 
 print "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
 print "<sphinx:docset xmlns:sphinx=\"http://sphinxsearch.com/\">"
@@ -33,11 +38,18 @@ print "	</sphinx:schema>"
 
 id = 0
 # Create XML
-for docid in db:
-    try:
-	item = db.get(docid)
+for database in dbs:
+    db = s[database]
+    print 'XDB' + database
+    for docid in db:
+        try:
+	    item = db.get(docid)
+	except:
+	    item = []
         id = id + 1
-        print "	<sphinx:document id=\"" + str(id) + "\">"
+
+	if item:
+             print "	<sphinx:document id=\"" + str(id) + "\">"
         for field in item:
 	    showline = 1
 	    if field == '_id1':
@@ -69,7 +81,6 @@ for docid in db:
 		    if replaced:
                         item[field] = replaced
                 print "	<" + field + '>' + item[field] + "</" + field + ">"
-        print "	</sphinx:document>"
-    except:
-	skip = 1
+	if item:
+            print "	</sphinx:document>"
 print "</sphinx:docset>"
