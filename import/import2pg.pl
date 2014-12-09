@@ -12,10 +12,11 @@ $| = 1;
 
 use Getopt::Std;
 %options=();
-getopts("od:f:",\%options);
+getopts("od:f:s:",\%options);
 # like the shell getopt, "d:" means d takes an argument
-$file = $options{o} if defined $options{o};
+$file = $options{f} if defined $options{f};
 $dir = $options{d} if defined $options{d};
+$superdir = $options{s} if defined $options{s};
 
 my %dbconfig = loadconfig("/etc/apache2/infra.conf");
 $site = $dbconfig{root};
@@ -23,6 +24,37 @@ my ($dbname, $dbhost, $dblogin, $dbpassword) = ($dbconfig{dbname}, $dbconfig{dbh
 my $dbh = DBI->connect("dbi:Pg:dbname=$dbname;host=$dbhost",$dblogin,$dbpassword,{AutoCommit=>1,RaiseError=>1,PrintError=>0});
 
 push(@files, $file) if ($file);
+push(@dirs, $dir) if ($dir);
+if ($superdir)
+{
+    opendir(DIR, $superdir);
+    @dir = readdir(DIR);
+    foreach $thisdir (@dir)
+    {
+        if (-d "$superdir/$thisdir")
+        {
+	    if ($thisdir=~/\w+/)
+	    {
+                push(@dirs, "$superdir/$thisdir");
+	    };
+        }
+    }
+    closedir(DIR);
+}
+
+foreach $dir (@dirs)
+{
+    opendir(DIR, $dir);
+    @dir = readdir(DIR);
+    foreach $file (@dir)
+    {
+	if ($file=~/\w+/ && $file!~/\.start/)
+	{
+	    push(@files, "$dir/$file");
+	}
+    }
+    closedir(DIR);
+}
 
 foreach $file (@files)
 {
