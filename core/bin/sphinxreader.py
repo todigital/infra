@@ -11,20 +11,29 @@ dbs = []
 database = 'nltest'
 userdb = sys.argv[1]
 date = time.strftime("%Y%m%d")
-hour = time.strftime("%H")
+thishour = time.strftime("%H")
 
 if userdb == 'ua':
-    database = userdb + '_' + date + '_' + hour
-    if int(hour):
-	hour = int(hour) - 1
+    if int(thishour):
+	hour = int(thishour)
+        hour = "%02d" % (hour)
+ 	database = userdb + '_' + date + '_' + hour	
+        dbok = 1
+        try:
+            db = s[database]
+        except:
+            dbok = 0
+        if dbok:
+            dbs.append(database)
+	hour = int(thishour) - 1
 	hour = "%02d" % (hour)
 	database = userdb + '_' + date + '_' + hour
 	dbs.append(database)
 elif userdb == 'uaday':
-    for i in range(int(hour)):
-	thishour = int(i)
-        thishour = "%02d" % (thishour)
-        database = 'ua_' + date + '_' + thishour
+    for i in range(int(thishour)):
+	thour = int(i)
+        thour = "%02d" % (thour)
+        database = 'ua_' + date + '_' + thour
 	dbok = 1
 	try:
 	    db = s[database]
