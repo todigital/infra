@@ -10,15 +10,28 @@ s = Server('http://127.0.0.1:5984/')
 dbs = []
 database = 'nltest'
 userdb = sys.argv[1]
+date = time.strftime("%Y%m%d")
+hour = time.strftime("%H")
+
 if userdb == 'ua':
-    date = time.strftime("%Y%m%d")
-    hour = time.strftime("%H")
     database = userdb + '_' + date + '_' + hour
     if int(hour):
 	hour = int(hour) - 1
 	hour = "%02d" % (hour)
 	database = userdb + '_' + date + '_' + hour
 	dbs.append(database)
+elif userdb == 'uaday':
+    for i in range(int(hour)):
+	thishour = int(i)
+        thishour = "%02d" % (thishour)
+        database = 'ua_' + date + '_' + thishour
+	dbok = 1
+	try:
+	    db = s[database]
+	except:
+	    dbok = 0
+	if dbok:
+            dbs.append(database)
 else:
     database = userdb
     dbs.append(database)
@@ -31,8 +44,8 @@ print "	<sphinx:field name=\"country\" attr=\"string\" />"
 print "	<sphinx:field name=\"url\" attr=\"string\" />"
 print "	<sphinx:attr name=\"year\" type=\"string\"/>"
 print " <sphinx:attr name=\"file_name\" type=\"string\"/>"
-print " <sphinx:attr name=\"json\" type=\"string\"/>"
-print " <sphinx:attr name=\"content\" type=\"string\"/>"
+print " <sphinx:field name=\"json\" type=\"string\"/>"
+print " <sphinx:field name=\"content\" type=\"string\"/>"
 print " <sphinx:attr name=\"_id\" type=\"string\"/>"
 print "	</sphinx:schema>"
 
