@@ -40,7 +40,6 @@ id = 0
 # Create XML
 for database in dbs:
     db = s[database]
-    print 'XDB' + database
     for docid in db:
         try:
 	    item = db.get(docid)
