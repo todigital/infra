@@ -3,14 +3,19 @@
 from couchdb import *
 import re
 import sys
+import time
 s = Server('http://127.0.0.1:5984/')
 
 # default database
 database = 'nltest'
 userdb = sys.argv[1]
-if userdb:
-    #nl_20141203
+if userdb == 'ua':
+    date = time.strftime("%Y%m%d")
+    hour = time.strftime("%H")
+    database = lang + '_' + date + '_' + hour
+else:
     database = userdb
+
 db = s[database]
 
 print "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
