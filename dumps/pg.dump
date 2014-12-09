@@ -1,0 +1,9 @@
+CREATE TABLE news (
+   id SERIAL PRIMARY KEY,
+   title TEXT NOT NULL,
+   content TEXT NOT NULL,
+   text TEXT NOT NULL,
+   url character varying(256) NOT NULL,
+   root character varying(256) NOT NULL
+);
+create index urlidx on news(url);
