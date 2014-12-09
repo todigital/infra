@@ -12,7 +12,7 @@ userdb = sys.argv[1]
 if userdb == 'ua':
     date = time.strftime("%Y%m%d")
     hour = time.strftime("%H")
-    database = lang + '_' + date + '_' + hour
+    database = userdb + '_' + date + '_' + hour
 else:
     database = userdb
 
