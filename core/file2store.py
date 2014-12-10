@@ -7,6 +7,8 @@ import sys
 import re
 import getopt
 import os
+import chardet
+import shutil
 
 filename = ''
 folder = ''
@@ -69,8 +71,26 @@ for filename in files:
     url = ''
     text = '' 
     try:
-        f = codecs.open(filename, "r", "utf-8")
-        filetext = f.read()
+	# Read/convert to utf-8
+	f = open(filename, 'r').read()
+        result = chardet.detect(f)
+        charset = result['encoding']
+        if charset == 'utf-8':
+	    filetext = f
+        else:
+            filetext = f.decode(charset)
+    	    fpath = os.path.abspath(filename)
+    	    newfilename = fpath + '.orig'
+    	    shutil.copy(filename, newfilename)
+	    print newfilename
+    	    f = open(filename, 'w')
+            try:
+                f.write(filetext)
+            except Exception, e:
+                print e
+            finally:
+                f.close()
+
         match = re.search('Monitorix-url: (\S+)', filetext)
         url = match.group(1)
 	text = str(filetext)
