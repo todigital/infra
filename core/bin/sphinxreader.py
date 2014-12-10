@@ -18,6 +18,7 @@ if userdb == 'ua':
 	hour = int(thishour)
         hour = "%02d" % (hour)
  	database = userdb + '_' + date + '_' + hour	
+	#print database
         dbok = 1
         try:
             db = s[database]
@@ -28,6 +29,7 @@ if userdb == 'ua':
 	hour = int(thishour) - 1
 	hour = "%02d" % (hour)
 	database = userdb + '_' + date + '_' + hour
+	#print database
 	dbs.append(database)
 elif userdb == 'uaday':
     for i in range(int(thishour)):
@@ -61,7 +63,12 @@ print "	</sphinx:schema>"
 id = 0
 # Create XML
 for database in dbs:
-    db = s[database]
+    db = []
+    try:
+        db = s[database]
+    except:
+	donothing = 1
+
     for docid in db:
         try:
 	    item = db.get(docid)
@@ -75,7 +82,7 @@ for database in dbs:
 	    showline = 1
 	    if field == '_id1':
 	        showline = 0
-	    if field == 'json1':
+	    if field == 'content1':
 	        showline = 0
 	    if field == '_rev':
                 showline = 0
