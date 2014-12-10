@@ -51,7 +51,7 @@ foreach $dir (@dirs)
 	if ($file=~/\w+/ && $file!~/(\.start|\.bak|\.orig)/)
 	{
 	    $path = "$dir/$file";
-	    $convert = `$Bin/convert.py $dir/$file`;
+	    #$convert = `$Bin/convert.py $dir/$file`;
 	    push(@files, "$path");
 	}
 	if ($file=~/\.bak/)
@@ -75,6 +75,7 @@ foreach $file (@files)
 
     print "$file\n" if ($DEBUG);
     my ($url, $root, $title, $html, $content, $text) = readhtml($file);
+    print "$url\n";
     $title = $dbh->quote($title);
     $html = $dbh->quote($html);  
     $content = $dbh->quote($content);
@@ -95,6 +96,7 @@ sub readhtml
     my ($title, $root, $html, $text);
 
     $convert = `$Bin/convert.py $filename`;
+    print "READ $filename\n";
     open my $fh, "<:encoding(utf8)", $filename or die "$filename\n";
     binmode STDOUT, ':utf8';
     @content = <$fh>;
@@ -118,7 +120,8 @@ sub readhtml
     $title = "notitle" unless ($title);
     $text = $title;
     $content = $html; 
-    $content=~s/<(?:[^>'"]*|(['"]).*?\1)*>//gsx;
+    #$content=~s/<(?:[^>'"]*|(['"]).*?\1)*>//gsx;
+    print "$title\n";
     if ($DEBUG)
     {
     #print  "@content\n";
@@ -127,7 +130,7 @@ sub readhtml
     };
 
     #print "$url $root\n";
-    print "$filename\n";
+    #print "$filename\n";
     return ($url, $root, $title, $html, $content, $text);
 }
 
