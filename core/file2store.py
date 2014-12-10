@@ -82,7 +82,6 @@ for filename in files:
     	    fpath = os.path.abspath(filename)
     	    newfilename = fpath + '.orig'
     	    shutil.copy(filename, newfilename)
-	    print newfilename
     	    f = open(filename, 'w')
             try:
                 f.write(filetext)
