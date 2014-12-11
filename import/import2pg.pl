@@ -20,7 +20,8 @@ getopts("od:f:s:T",\%options);
 my @time = (localtime)[0..5];
 my $Tdate = sprintf("%04d%02d%02d", $time[5]+1900, $time[4]+1, $time[3]);
 my $Thour = sprintf("%02d", $time[2]);
-$curfetch = "/media/ext2/data/ua/curfetch";
+my %dbconfig = loadconfig("/etc/apache2/infra.conf");
+$curfetch = $dbconfig{curfetchua};
 $limit = 60;
 
 # like the shell getopt, "d:" means d takes an argument
@@ -40,7 +41,6 @@ if ($options{T})
     print "@dirs\n" if ($DEBUG);
 }
 
-my %dbconfig = loadconfig("/etc/apache2/infra.conf");
 $site = $dbconfig{root};
 my ($dbname, $dbhost, $dblogin, $dbpassword) = ($dbconfig{dbname}, $dbconfig{dbhost}, $dbconfig{dblogin}, $dbconfig{dbpassword});
 my $dbh = DBI->connect("dbi:Pg:dbname=$dbname;host=$dbhost",$dblogin,$dbpassword,{AutoCommit=>1,RaiseError=>1,PrintError=>0});
