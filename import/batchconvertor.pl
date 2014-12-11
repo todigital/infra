@@ -13,6 +13,12 @@ my %dbconfig = loadconfig("/etc/apache2/infra.conf");
 $curfetch = $dbconfig{curfetchua};
 $limit = 60;
 
+my $ps = `ps -xwww`;
+$PARALLEL_STREAMS = 3;
+@crawls = split(/batchconvertor\.pl/i, $ps);
+$forbid = 1 if ($#crawls > $PARALLEL_STREAMS);
+exit(0) if ($forbid);
+
 use Getopt::Std;
 %options=();
 getopts("od:f:s:T",\%options);
