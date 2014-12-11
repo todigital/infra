@@ -21,6 +21,7 @@ my @time = (localtime)[0..5];
 my $Tdate = sprintf("%04d%02d%02d", $time[5]+1900, $time[4]+1, $time[3]);
 my $Thour = sprintf("%02d", $time[2]);
 $curfetch = "/media/ext2/data/ua/curfetch";
+$limit = 60;
 
 # like the shell getopt, "d:" means d takes an argument
 $file = $options{f} if defined $options{f};
@@ -37,7 +38,6 @@ if ($options{T})
 	push(@dirs, $dir);
     }
     print "@dirs\n" if ($DEBUG);
-    exit(0);
 }
 
 my %dbconfig = loadconfig("/etc/apache2/infra.conf");
@@ -68,27 +68,24 @@ foreach $dir (@dirs)
 {
     opendir(DIR, $dir);
     @dir = readdir(DIR);
+
     foreach $file (@dir)
     {
-	#if ($file=~/\w+/ && $file!~/(\.start|\.bak|\.orig)/)
-	$dbfile = "$file.utf8";
-	my $newfileflag = 1;
-	$newfileflag = 0 unless (-e "$dir/$dbfile");
-	$indatabase{"$dir/$file"} = "$dir/$dbfile.db";
-	$newfileflag = 0 if (-e $indatabase{"$dir/$file"});
-	if ($newfileflag)
+	if ($file=~/\.utf8$/)
 	{
-	    $path = "$dir/$file";
-	    #$convert = `$Bin/convert.py $dir/$file`;
-	    push(@files, "$path");
-	}
-	if ($file=~/\.bak/)
-	{
-	    $ofile = $file;
-	    $ofile=~s/\.bak//g;
-	    $mv = `/bin/mv $dir/$file $dir/$ofile`;
-	    print "$dir/$file\n";
-	}
+	    $dbfile = "$dir/$file.db";
+	    my $newfileflag = 1;
+
+	    $indatabase{"$dir/$file"} = "$dbfile";
+	    $newfileflag = 0 if (-e $indatabase{"$dir/$file"});
+	    $newfileflag = 0 if ($files >= $limit);
+	    if ($newfileflag)
+	    {
+	        $path = "$dir/$file";
+	        push(@files, "$path");
+		$files++;
+	    }
+	};
     }
     closedir(DIR);
 }
@@ -121,7 +118,7 @@ foreach $file (@files)
 	try {
 		$dbh->do($sql);
 		open(status, ">$indatabase{$file}");
-		print status "$title\n";
+		print status "$url\n$title\n";
 	 	close(status);
 	} catch {
 		warn "error: $url\n";
@@ -136,24 +133,12 @@ sub readhtml
     my ($filename, $DEBUG) = @_;
     my ($title, $root, $html, $text);
 
-    #$convert = `$Bin/convert.py $filename`;
     print "READ $filename\n";
     open(smfile, $filename);
-    @orightml = <smfile>;
+    @content = <smfile>;
     close(smfile);
     my $texthtml = '';
-    for ($i=0; $i<=10; $i++)
-    {
-        $texthtml.=$orightml[$i];
-    }
-
-    if ($texthtml=~/html/sxi)
-    {
-    open my $fh, "<:encoding(utf8)", $filename or die "$filename\n";
-    binmode STDOUT, ':utf8';
-    @content = <$fh>;
-    close $fh;
-
+    
     $url = shift @content;
     if ($url=~/Monitorix\-url\:\s+(.+)/)
     {
@@ -184,11 +169,7 @@ sub readhtml
         print "$content\n";
     };
 
-    $charset = Lingua::DetectCharset::Detect ($texthtml); 
-    }
-
-    $charset = '' unless ($texthtml=~/html/xsi);
-    $charset = '' unless ($text);
+    $charset = 'utf8';
     return ($charset, $url, $root, $title, $html, $content, $text);
 }
 
