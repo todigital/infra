@@ -15,11 +15,30 @@ use Try::Tiny;
 
 use Getopt::Std;
 %options=();
-getopts("od:f:s:",\%options);
+getopts("od:f:s:T",\%options);
+
+my @time = (localtime)[0..5];
+my $Tdate = sprintf("%04d%02d%02d", $time[5]+1900, $time[4]+1, $time[3]);
+my $Thour = sprintf("%02d", $time[2]);
+$curfetch = "/media/ext2/data/ua/curfetch";
+
 # like the shell getopt, "d:" means d takes an argument
 $file = $options{f} if defined $options{f};
 $dir = $options{d} if defined $options{d};
 $superdir = $options{s} if defined $options{s};
+if ($options{T})
+{
+    $dir = "$curfetch/$Tdate/$Thour"; 
+    push(@dirs, $dir);
+    if ($Thour - 1 >= 0)
+    {
+	$Phour = sprintf("%02d", $Thour - 1);
+	$dir = "$curfetch/$Tdate/$Phour";
+	push(@dirs, $dir);
+    }
+    print "@dirs\n" if ($DEBUG);
+    exit(0);
+}
 
 my %dbconfig = loadconfig("/etc/apache2/infra.conf");
 $site = $dbconfig{root};
@@ -51,7 +70,13 @@ foreach $dir (@dirs)
     @dir = readdir(DIR);
     foreach $file (@dir)
     {
-	if ($file=~/\w+/ && $file!~/(\.start|\.bak|\.orig)/)
+	#if ($file=~/\w+/ && $file!~/(\.start|\.bak|\.orig)/)
+	$dbfile = "$file.utf8";
+	my $newfileflag = 1;
+	$newfileflag = 0 unless (-e "$dir/$dbfile");
+	$indatabase{"$dir/$file"} = "$dir/$dbfile.db";
+	$newfileflag = 0 if (-e $indatabase{"$dir/$file"});
+	if ($newfileflag)
 	{
 	    $path = "$dir/$file";
 	    #$convert = `$Bin/convert.py $dir/$file`;
@@ -95,6 +120,9 @@ foreach $file (@files)
         $sql = "insert into news (filename, charset, hour, title, html, content, text, url, root, founddate) values ('$file', '$charset', '$hour', $title, $html, $content, $text, '$url', '$root', '$dates{$file}');";
 	try {
 		$dbh->do($sql);
+		open(status, ">$indatabase{$file}");
+		print status "$title\n";
+	 	close(status);
 	} catch {
 		warn "error: $url\n";
 	}
