@@ -8,7 +8,10 @@ use lib "$libpath/../libs";
 
 use DB_File;
 use DBI;
+use Encode;
+use Lingua::DetectCharset;
 $| = 1;
+use Try::Tiny;
 
 use Getopt::Std;
 %options=();
@@ -70,21 +73,31 @@ foreach $file (@files)
     if ($file=~/\/(\d{4})(\d{2})(\d{2})\/(\d+)/)
     {
         my $date = sprintf("%04d-%02d-%02d %02d:00", $1, $2, $3, $4);
+	$hour = $4;
         $dates{$file} = $date;
     }
 
     print "$file\n" if ($DEBUG);
-    my ($url, $root, $title, $html, $content, $text) = readhtml($file);
+    my ($charset, $url, $root, $title, $html, $content, $text) = readhtml($file);
     print "$url\n";
     $title = $dbh->quote($title);
     $html = $dbh->quote($html);  
     $content = $dbh->quote($content);
     $text = $dbh->quote($text);
     $id = '0';
-    if ($url && !$known{$url})
+    $true = 0;
+    $true = 1 if ($url && !$known{$url}); # && $charset=~/utf/i);
+    $true = 0 if ($url=~/(\.jpg|\.png)/sxi);
+    $true = 0 unless ($charset);
+
+    if ($true)
     {
-        $sql = "insert into news (title, html, content, text, url, root, founddate) values ($title, $html, $content, $text, '$url', '$root', '$dates{$file}');";
-	$dbh->do($sql);
+        $sql = "insert into news (filename, charset, hour, title, html, content, text, url, root, founddate) values ('$file', '$charset', '$hour', $title, $html, $content, $text, '$url', '$root', '$dates{$file}');";
+	try {
+		$dbh->do($sql);
+	} catch {
+		warn "error: $url\n";
+	}
 	#print "$sql\n";
     }
     $known{$url}++;
@@ -95,8 +108,19 @@ sub readhtml
     my ($filename, $DEBUG) = @_;
     my ($title, $root, $html, $text);
 
-    $convert = `$Bin/convert.py $filename`;
+    #$convert = `$Bin/convert.py $filename`;
     print "READ $filename\n";
+    open(smfile, $filename);
+    @orightml = <smfile>;
+    close(smfile);
+    my $texthtml = '';
+    for ($i=0; $i<=10; $i++)
+    {
+        $texthtml.=$orightml[$i];
+    }
+
+    if ($texthtml=~/html/sxi)
+    {
     open my $fh, "<:encoding(utf8)", $filename or die "$filename\n";
     binmode STDOUT, ':utf8';
     @content = <$fh>;
@@ -118,20 +142,26 @@ sub readhtml
 	$title = $1;
     }
     $title = "notitle" unless ($title);
-    $text = $title;
+    $text = $html;
     $content = $html; 
     #$content=~s/<(?:[^>'"]*|(['"]).*?\1)*>//gsx;
-    print "$title\n";
+    $text =~ s/<script.*?<\'/script>/sg;
+    $text =~ s/<.+?>//sg;
+
+    #print "$title\n";
     if ($DEBUG)
     {
-    #print  "@content\n";
-    print "$title\n";
-    print "$content\n";
+        #print  "@content\n";
+        print "$title\n";
+        print "$content\n";
     };
 
-    #print "$url $root\n";
-    #print "$filename\n";
-    return ($url, $root, $title, $html, $content, $text);
+    $charset = Lingua::DetectCharset::Detect ($texthtml); 
+    }
+
+    $charset = '' unless ($texthtml=~/html/xsi);
+    $charset = '' unless ($text);
+    return ($charset, $url, $root, $title, $html, $content, $text);
 }
 
 sub loadconfig
