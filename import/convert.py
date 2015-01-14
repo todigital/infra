@@ -19,19 +19,22 @@ def convert_to_utf8(filename):
     result = chardet.detect(f)
     charset = result['encoding']
     if charset == 'utf-8':
-        return
+	data = f
     else:
         data = f.decode(charset)
 
     # now get the absolute path of our filename and append .bak
     # to the end of it (for our backup file)
     fpath = os.path.abspath(filename)
-    newfilename = fpath + '.orig'
+    newfilename = fpath + '.utf8'
+    tmpfilename = fpath + '.tmp'
     # and make our backup file with shutil
-    shutil.copy(filename, newfilename)
+    #shutil.copy(filename, newfilename)
+    f = open(tmpfilename, 'w')
+    f.close()
  
     # and at last convert it to utf-8
-    f = open(filename, 'w')
+    f = open(newfilename, 'w')
     try:
         f.write(data.encode('utf-8'))
     except Exception, e:
