@@ -90,9 +90,11 @@ for filename in files:
             finally:
                 f.close()
 
+	print filename
         match = re.search('Monitorix-url: (\S+)', filetext)
         url = match.group(1)
 	text = str(filetext)
+	print url
     except:
 	skip = 1
 
