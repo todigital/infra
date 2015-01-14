@@ -1,12 +1,18 @@
 DROP TABLE news;
+CREATE SEQUENCE id_seq;
 CREATE TABLE news (
+   id integer PRIMARY KEY default nextval('id_seq'),
    title TEXT NOT NULL,
    html TEXT NOT NULL,
    content TEXT NOT NULL,
    text TEXT NOT NULL,
    url character varying(256) NOT NULL,
    root character varying(256) NOT NULL,
+   hour integer NOT NULL,
+   filename character varying(256) NOT NULL,
+   charset character varying(12) NOT NULL,
    founddate timestamp with time zone DEFAULT now() NOT NULL,
    insertdate timestamp with time zone DEFAULT now() NOT NULL
 );
 create index urlidx on news(url);
+create index houridx on news(hour);
