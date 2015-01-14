@@ -83,6 +83,9 @@ foreach $dir (@dirs)
 	    {
 	        $path = "$dir/$file";
 	        push(@files, "$path");
+                open(status, ">$indatabase{$path}");
+                print status "in que...\n";
+                close(status);
 		$files++;
 	    }
 	};
