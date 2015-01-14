@@ -30,7 +30,7 @@ if userdb == 'ua':
 	hour = "%02d" % (hour)
 	database = userdb + '_' + date + '_' + hour
 	#print database
-	dbs.append(database)
+	#dbs.append(database)
 elif userdb == 'uaday':
     for i in range(int(thishour)):
 	thour = int(i)
