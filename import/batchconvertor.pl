@@ -11,10 +11,10 @@ my $Tdate = sprintf("%04d%02d%02d", $time[5]+1900, $time[4]+1, $time[3]);
 my $Thour = sprintf("%02d", $time[2]);
 my %dbconfig = loadconfig("/etc/apache2/infra.conf");
 $curfetch = $dbconfig{curfetchua};
-$limit = 60;
+$limit = 20;
 
 my $ps = `ps -xwww`;
-$PARALLEL_STREAMS = 3;
+$PARALLEL_STREAMS = 2;
 @crawls = split(/batchconvertor\.pl/i, $ps);
 $forbid = 1 if ($#crawls > $PARALLEL_STREAMS);
 exit(0) if ($forbid);
@@ -57,8 +57,8 @@ foreach $dir (@dirs)
 	    open(tmp, ">$dir/$file.tmp");
 	    print tmp "\n";
 	    close(tmp);
-	    $convert = `$Bin/convert.py $dir/$file`;
-	    unlink "$dir/$file.tmp";
+	    $convert = `$Bin/convert.py $dir/$file &`;
+	    #unlink "$dir/$file.tmp";
 	}
     }
 
