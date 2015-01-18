@@ -2,22 +2,32 @@
 import redis
 import shutil
 import chardet
+import re
 from recognizer import text_processor, text_processor_test
 from BeautifulSoup import BeautifulSoup
 
 redis = redis.Redis(host='localhost', port=6379, db=0)
-limit = 2
+limit = 20
 count = 0
 idealmodel = ''
 debug = 0
 
 def buildpattern(html, debug):
-    result = {}
+    doc = {}
+    docwords = {}
     structure = []
     fulltext = []
     title = ''
     attributes = {}
     
+    # HTMLDELIM = ["</title>", "</div>", "</script>", "</p>", "</li>", "</html>"]
+    html = re.sub(r'<\/script>', "</script>\n", html)
+    html = re.sub(r'<meta ', "\n<meta ", html)
+    html = re.sub(r'<\/title>', "</title>\n", html)
+    html = re.sub(r'<\/div>', "</div>\n", html)
+    html = re.sub(r'<\/p>', "</p>\n", html)
+    html = re.sub(r'<\/li>', "</li>\n", html)
+
     htmlstrings = html.splitlines()
     if htmlstrings:
         lineID = 0
@@ -36,17 +46,26 @@ def buildpattern(html, debug):
                          htmltags.append(name)
                     elif not child.isspace(): # leaf node, don't print spaces
                          donothing = 1
+                matrix = {}
+                matrix['words'] = words
+                matrix['comas'] = comas
+                matrix['dots'] = dots
+                matrix['equal'] = equal
+                matrix['html'] = line
                 code = 'W' + str(words) + ',C' + str(comas) + ',D' + str(dots) + ',E' + str(equal)
-                result[lineID] = code
-		lineID = lineID + 1
+                matrix['code'] = code
+                doc[lineID] = matrix
+                lineID = lineID + 1  
 
     if debug:
-	sorted(result, key=int)
-	for lineID in result:
-	    code = result[lineID]
-            print str(lineID) + ',' + code
+	sorted(doc, key=int)
+	for lineID in doc:
+            item = doc[lineID]
+            code = item['code']
+            line = item['html']
+            print str(lineID) + ',' + code + '		' + line
     
-    return result
+    return doc
 
 keys = redis.keys('*');
 for key in keys:
@@ -57,7 +76,7 @@ for key in keys:
         html = val
 
     if count <= limit:
-        print key
+        print 'URL ' + key
         result = chardet.detect(html)
         charset = result['encoding']
         if charset == 'utf-8':
