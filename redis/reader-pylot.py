@@ -10,7 +10,9 @@ from patterns import buildpattern
 redis = redis.Redis(host='localhost', port=6379, db=0)
 DATASETDIR = 'datasets'
 CONTENTDIR = 'content'
-limit = 102
+ORIGDIR = 'original'
+HEADLINE = "line,words,comas,dots,equal,urls,time,date"
+limit = 1
 count = 0
 idealmodel = ''
 debug = 0
@@ -19,10 +21,12 @@ id = 0
 keys = redis.keys('*');
 for key in keys:
     id = id + 1
-    datasetfile = DATASETDIR + "/news.txt" + str(id)
-    contentfile = CONTENTDIR + "/news.txt" + str(id)
+    datasetfile = DATASETDIR + "/sample" + str(id) + ".txt"
+    contentfile = CONTENTDIR + "/sample" + str(id) + ".txt"
+    origfile = ORIGDIR + "/sample" + str(id) + ".txt"
     content = open(contentfile,'w')
     dataset = open(datasetfile,"w")
+    origin = open(origfile,"w")
     type = redis.type(key);
     value = ''
     if type == 'string':
@@ -31,6 +35,8 @@ for key in keys:
 
     if count <= limit:
         print key
+	content.write(key + '\n')
+	dataset.write(HEADLINE + '\n')
         result = chardet.detect(html)
         charset = result['encoding']
         if charset == 'utf-8':
@@ -48,6 +54,7 @@ for key in keys:
             if lineID:
 		status = ''
                 code = item['code']
+		line = item['line']
                 words = item['words']
                 words = item['visiblewords']
                 tags = item['tags']
@@ -55,15 +62,17 @@ for key in keys:
                     status = item['status']
                 x.append(lineID)
                 y.append(int(words))
+		outstr = str(lineID) + ',' + code
                 if status == 'active':
-                    outstr = str(lineID) + ',' + code 
-		    #+ ',' + line + '\t' 
 		    contentstr = str(lineID) + ' ' + tags
+		    originstr = str(lineID) + line 
 		    content.write(contentstr + '\n') 
-                    dataset.write(outstr + '\n') # python will convert \n to os.linesep
+		    origin.write(originstr + '\n')
+		dataset.write(outstr + '\n')	
         print x
         print y
         
     count = count + 1
     content.close()
     dataset.close()
+    origin.close()

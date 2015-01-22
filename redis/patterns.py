@@ -7,6 +7,7 @@ import chardet
 from BeautifulSoup import BeautifulSoup
 import re
 
+YEAR = 2015
 def buildpattern(html, debug):
     doc = {}
     docwords = {}
@@ -35,7 +36,9 @@ def buildpattern(html, debug):
     if htmlstrings:
         lineID = 0
         active = 1
+	go = 1
         for line in htmlstrings:
+	    matrix = {}
             lenstr = len(line)
             words = len(line.split())
             comas = len(line.split(","))
@@ -43,25 +46,29 @@ def buildpattern(html, debug):
             equal = len(line.split("="))
             soup = BeautifulSoup(line)
             
-            if words:
+            if go:
                 htmltags = []
-                visiblecontent = soup.getText()
+                visible = soup.getText()
+		visiblecontent = visible
                 for child in soup.recursiveChildGenerator():
                     name = getattr(child, "name", None)
                     if name is not None:
                          htmltags.append(name)
                     elif not child.isspace(): # leaf node, don't print spaces
                          donothing = 1
-                matrix = {}
-                visiblewords = len(visiblecontent.split())
+		time = '0'
+		date = ''
+                visiblewords = len(visible.split())
                 
                 openignore = re.match(r'<style|<script', line)
                 closeignore = re.match(r'<\/style|<\/script', line)
                 urlstatus = re.findall(r'<a', line)
                 timeflag = re.findall('([0-9]+:[0-9]+)', line)
+		dateflag = re.findall(r'20\d{2}', line)
                 if openignore:
                     active = 0 
                             
+		matrix['line'] = line
                 matrix['words'] = str(words)
                 matrix['visiblewords'] = 0
                 matrix['comas'] = comas
@@ -69,16 +76,22 @@ def buildpattern(html, debug):
                 matrix['equal'] = equal
                 matrix['html'] = line
                 matrix['status'] = 'active'
+		matrix['date'] = 0
+		if dateflag:
+		    matrix['date'] = dateflag[0]
                 if timeflag:
-                    matrix['timeflag'] = str(timeflag)
+                    matrix['timeflag'] = 1 
+		    time = timeflag[0]
+		    visiblecontent = re.sub(r'([0-9]+:[0-9]+)', r'\1 ', visiblecontent)
                 else:
-                    matrix['timeflag'] = ''
+                    matrix['timeflag'] = 0
                 matrix['tags'] = str(visiblecontent)
                 if urlstatus:
                     matrix['urlstatus'] = 1
                 else:
                     matrix['urlstatus'] = 0
-                code = 'W' + str(visiblewords) + ',C' + str(comas) + ',D' + str(dots) + ',E' + str(equal) + ',U' + str(matrix['urlstatus']) + 'T' + matrix['timeflag']
+                code = 'W' + str(visiblewords) + ',C' + str(comas) + ',D' + str(dots) + ',E' + str(equal) + ',U' + str(matrix['urlstatus']) + 'T' + str(matrix['timeflag'])
+		code = str(visiblewords) + ',' + str(comas) + ',' + str(dots) + ',' + str(equal) + ',' + str(matrix['urlstatus']) + ',' + str(matrix['timeflag']) + ',' + time + ',' + str(matrix['date'])
                 matrix['code'] = code
                 if visiblewords > 0:
                     matrix['visiblewords'] = str(visiblewords)
@@ -87,11 +100,15 @@ def buildpattern(html, debug):
                     matrix['status'] = 'ignored'
                 if visiblewords <= 1:
                     matrix['status'] = 'ignored'
-                doc[lineID] = matrix
+
+		if matrix['status'] == 'innored':
+		    code = '0,0,0,0,0,0,0,0'
+		    matrix['code'] = code
 
                 if closeignore:
                     active = 1
 
+	        doc[lineID] = matrix
             lineID = lineID + 1    
         
     return (x,y,doc)
