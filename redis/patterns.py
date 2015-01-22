@@ -1,16 +1,11 @@
 #!/usr/bin/python
 
 import redis
+import vincent
 import shutil
 import chardet
 from BeautifulSoup import BeautifulSoup
 import re
-
-redis = redis.Redis(host='localhost', port=6379, db=0)
-limit = 1
-count = 0
-idealmodel = ''
-debug = 0
 
 def buildpattern(html, debug):
     doc = {}
@@ -23,19 +18,23 @@ def buildpattern(html, debug):
     y = []
     
     # HTMLDELIM = ["</title>", "</div>", "</script>", "</p>", "</li>", "</html>"]
-    html = re.sub(r'<\/script>', "</script>\n", html)
+    html = re.sub(r'<script', "\n<script", html)
+    html = re.sub(r'<a', " <a", html)
+    html = re.sub(r'<style', "\n<style", html)
+    html = re.sub(r'<\/script>', "\n</script>\n", html)
     html = re.sub(r'<meta ', "\n<meta ", html)
     html = re.sub(r'<\/title>', "</title>\n", html)
     html = re.sub(r'<\/div>', "</div>\n", html)
     html = re.sub(r'<\/p>', "</p>\n", html)
     html = re.sub(r'<\/li>', "</li>\n", html)
-    html = re.sub(r'<\/style>', "</style>\n", html)
+    html = re.sub(r'<\/style>', "\n</style>\n", html)
     html = re.sub(r'<\/dd>', "</dd>\n", html)
 
     htmlstrings = html.splitlines()
 
     if htmlstrings:
         lineID = 0
+        active = 1
         for line in htmlstrings:
             lenstr = len(line)
             words = len(line.split())
@@ -43,6 +42,7 @@ def buildpattern(html, debug):
             dots = len(line.split("."))
             equal = len(line.split("="))
             soup = BeautifulSoup(line)
+            
             if words:
                 htmltags = []
                 visiblecontent = soup.getText()
@@ -54,37 +54,44 @@ def buildpattern(html, debug):
                          donothing = 1
                 matrix = {}
                 visiblewords = len(visiblecontent.split())
+                
+                openignore = re.match(r'<style|<script', line)
+                closeignore = re.match(r'<\/style|<\/script', line)
+                urlstatus = re.findall(r'<a', line)
+                timeflag = re.findall('([0-9]+:[0-9]+)', line)
+                if openignore:
+                    active = 0 
+                            
                 matrix['words'] = str(words)
                 matrix['visiblewords'] = 0
                 matrix['comas'] = comas
                 matrix['dots'] = dots
                 matrix['equal'] = equal
                 matrix['html'] = line
+                matrix['status'] = 'active'
+                if timeflag:
+                    matrix['timeflag'] = str(timeflag)
+                else:
+                    matrix['timeflag'] = ''
                 matrix['tags'] = str(visiblecontent)
-                code = 'W' + str(visiblewords) + ',C' + str(comas) + ',D' + str(dots) + ',E' + str(equal)
+                if urlstatus:
+                    matrix['urlstatus'] = 1
+                else:
+                    matrix['urlstatus'] = 0
+                code = 'W' + str(visiblewords) + ',C' + str(comas) + ',D' + str(dots) + ',E' + str(equal) + ',U' + str(matrix['urlstatus']) + 'T' + matrix['timeflag']
                 matrix['code'] = code
-                if visiblewords > 10:
+                if visiblewords > 0:
                     matrix['visiblewords'] = str(visiblewords)
+                if active == 0:
+                    matrix['visiblewords'] = 0
+                    matrix['status'] = 'ignored'
+                if visiblewords <= 1:
+                    matrix['status'] = 'ignored'
                 doc[lineID] = matrix
+
+                if closeignore:
+                    active = 1
+
             lineID = lineID + 1    
         
-    if debug:
-        sorted(doc, key=int)
-         
-        #for lineID in doc:
-        for lineID,item in doc.items():
-        #lineID = 1003
-            if lineID:
-                code = item['code']
-                line = str(item['html'])
-                words = item['words']
-                words = item['visiblewords']
-                tags = item['tags']
-                x.append(lineID)
-                y.append(int(words))
-                #print 'W' + str(words) + ' ' + line + ' ' + code
-                if words:
-                    print str(lineID) + ',' + code + ',' + line + '\t' + tags
-    
     return (x,y,doc)
-
