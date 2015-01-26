@@ -11,7 +11,7 @@ redis = redis.Redis(host='localhost', port=6379, db=0)
 DATASETDIR = 'datasets'
 CONTENTDIR = 'content'
 ORIGDIR = 'original'
-HEADLINE = "line,words,comas,dots,equal,urls,time,date"
+HEADLINE = "\"id\",\"words\",\"words1\",\"comas\",\"dots\",\"equal\",\"urls\",\"time\",\"date\""
 limit = 1
 count = 0
 idealmodel = ''
@@ -62,13 +62,17 @@ for key in keys:
                     status = item['status']
                 x.append(lineID)
                 y.append(int(words))
-		outstr = str(lineID) + ',' + code
+		outstr = '"' + str(lineID) + '"' + ',' + code
                 if status == 'active':
 		    contentstr = str(lineID) + ' ' + tags
 		    originstr = str(lineID) + line 
 		    content.write(contentstr + '\n') 
 		    origin.write(originstr + '\n')
-		dataset.write(outstr + '\n')	
+		    dataset.write(outstr + '\n')	
+		else:
+		    xcode = '0,0,0,0,0,0,0,0'
+		    outstr = '"' + str(lineID) + '"' + ',' + xcode
+		    dataset.write(outstr + '\n')
         print x
         print y
         
