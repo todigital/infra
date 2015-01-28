@@ -58,6 +58,7 @@ def buildpattern(html, debug):
                          donothing = 1
 		time = '0'
 		date = ''
+		activeflag = 0
                 visiblewords = len(visible.split())
                 
                 openignore = re.match(r'<style|<script', line)
@@ -79,7 +80,9 @@ def buildpattern(html, debug):
 		matrix['date'] = 0
 		if dateflag:
 		    matrix['date'] = dateflag[0]
+		    activeflag = 1
                 if timeflag:
+		    activeflag = 1
                     matrix['timeflag'] = 1 
 		    time = timeflag[0]
 		    visiblecontent = re.sub(r'([0-9]+:[0-9]+)', r'\1 ', visiblecontent)
@@ -90,19 +93,24 @@ def buildpattern(html, debug):
                     matrix['urlstatus'] = 1
                 else:
                     matrix['urlstatus'] = 0
-                code = 'W' + str(visiblewords) + ',C' + str(comas) + ',D' + str(dots) + ',E' + str(equal) + ',U' + str(matrix['urlstatus']) + 'T' + str(matrix['timeflag'])
-		code = str(visiblewords) + ',' + str(comas) + ',' + str(dots) + ',' + str(equal) + ',' + str(matrix['urlstatus']) + ',' + str(matrix['timeflag']) + ',' + time + ',' + str(matrix['date'])
-                matrix['code'] = code
+                #code = 'W' + str(visiblewords) + ',C' + str(comas) + ',D' + str(dots) + ',E' + str(equal) + ',U' + str(matrix['urlstatus']) + 'T' + str(matrix['timeflag'])
                 if visiblewords > 0:
+                    activeflag = 2
                     matrix['visiblewords'] = str(visiblewords)
+
+		matrix['active'] = activeflag
+		code = str(visiblewords) + ',' + str(comas) + ',' + str(dots) + ',' + str(equal) + ',' + str(matrix['urlstatus']) + ',' + str(matrix['timeflag']) + ',' + time + ',' + str(matrix['date']) + ',' + str(activeflag)
+                matrix['code'] = code
+
                 if active == 0:
                     matrix['visiblewords'] = 0
                     matrix['status'] = 'ignored'
                 if visiblewords <= 1:
                     matrix['status'] = 'ignored'
 
-		if matrix['status'] == 'innored':
-		    code = '0,0,0,0,0,0,0,0'
+		if matrix['status'] == 'ignored':
+		    code = '0,0,0,0,0,0,0,0,0'
+		    matrix['active'] = 0
 		    matrix['code'] = code
 
                 if closeignore:

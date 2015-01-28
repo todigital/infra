@@ -11,7 +11,8 @@ redis = redis.Redis(host='localhost', port=6379, db=0)
 DATASETDIR = 'datasets'
 CONTENTDIR = 'content'
 ORIGDIR = 'original'
-HEADLINE = "\"id\",\"words\",\"words1\",\"comas\",\"dots\",\"equal\",\"urls\",\"time\",\"date\""
+NEWSDIR = 'news'
+HEADLINE = "\"id\",\"words\",\"words1\",\"comas\",\"dots\",\"equal\",\"urls\",\"time\",\"date\",\"active\""
 limit = 1
 count = 0
 idealmodel = ''
@@ -24,9 +25,11 @@ for key in keys:
     datasetfile = DATASETDIR + "/sample" + str(id) + ".txt"
     contentfile = CONTENTDIR + "/sample" + str(id) + ".txt"
     origfile = ORIGDIR + "/sample" + str(id) + ".txt"
+    newsfile = NEWSDIR + "/sample" + str(id) + ".txt"
     content = open(contentfile,'w')
     dataset = open(datasetfile,"w")
     origin = open(origfile,"w")
+    news = open(newsfile,"w")
     type = redis.type(key);
     value = ''
     if type == 'string':
@@ -46,6 +49,7 @@ for key in keys:
 
         (x, y, doc) = buildpattern(data, 'd')
 	sorted(doc, key=int)
+	coords = {}
         for lineID,item in doc.items():
             line = str(item['html'])
             openignore = re.match(r'<style|<script', line)
@@ -58,11 +62,15 @@ for key in keys:
                 words = item['words']
                 words = item['visiblewords']
                 tags = item['tags']
+		activeflag = item['active']
 		if item['status']:
                     status = item['status']
                 x.append(lineID)
                 y.append(int(words))
 		outstr = '"' + str(lineID) + '"' + ',' + code
+		if activeflag:
+		    coords[lineID] = activeflag
+
                 if status == 'active':
 		    contentstr = str(lineID) + ' ' + tags
 		    originstr = str(lineID) + line 
@@ -70,7 +78,7 @@ for key in keys:
 		    origin.write(originstr + '\n')
 		    dataset.write(outstr + '\n')	
 		else:
-		    xcode = '0,0,0,0,0,0,0,0'
+		    xcode = '0,0,0,0,0,0,0,0,0'
 		    outstr = '"' + str(lineID) + '"' + ',' + xcode
 		    dataset.write(outstr + '\n')
         print x
@@ -80,3 +88,13 @@ for key in keys:
     content.close()
     dataset.close()
     origin.close()
+
+    for lineID,item in doc.items():
+	itemcode = 'N'
+	if item['active'] == '1':
+	    itemcode = 'T'
+	if item['active']:
+	    item = doc[lineID]
+	    line = itemcode + ' ' + str(lineID) + ' ' + item['html'] + '\n'
+	    news.write(line)
+    news.close()
