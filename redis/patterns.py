@@ -17,6 +17,9 @@ def buildpattern(html, debug):
     attributes = {}
     x = []
     y = []
+    table = {}
+    Rindex = {}
+    Mindex = []
     
     # HTMLDELIM = ["</title>", "</div>", "</script>", "</p>", "</li>", "</html>"]
     html = re.sub(r'<script', "\n<script", html)
@@ -37,6 +40,8 @@ def buildpattern(html, debug):
         lineID = 0
         active = 1
 	go = 1
+	position = 0
+	index = 0
         for line in htmlstrings:
 	    matrix = {}
             lenstr = len(line)
@@ -109,9 +114,21 @@ def buildpattern(html, debug):
                     matrix['status'] = 'ignored'
 
 		if matrix['status'] == 'ignored':
-		    code = '0,0,0,0,0,0,0,0,0'
+		    code = '0,0,0,0,0,0,0,0,0,0'
 		    matrix['active'] = 0
 		    matrix['code'] = code
+		    matrix['index'] = 0
+		else:
+		    index = lineID - position
+		    matrix['index'] = index 
+		    Mindex.append(lineID)
+		    try: 
+			table[index] = table[index] + 1
+			Rindex[index] = Rindex[index] + str(lineID) + ' '
+		    except:
+			table[index] = 1
+			Rindex[index] = str(lineID) + ' '
+		    position = lineID
 
                 if closeignore:
                     active = 1
@@ -119,4 +136,13 @@ def buildpattern(html, debug):
 	        doc[lineID] = matrix
             lineID = lineID + 1    
         
-    return (x,y,doc)
+    for Windex in sorted(table):
+        Wval = table[Windex]
+        if Wval > 1:
+            out = str(Windex) + ' ' + str(Wval)
+            #print out
+	#1 21
+	#2 21
+	#3 8
+
+    return (x,y,doc,table,Rindex,Mindex)
