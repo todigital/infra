@@ -13,14 +13,17 @@ DATASETDIR = 'datasets'
 CONTENTDIR = 'content'
 ORIGDIR = 'original'
 NEWSDIR = 'news'
+DEBUG = 0
 HEADLINE = "\"id\",\"words\",\"words1\",\"comas\",\"dots\",\"equal\",\"urls\",\"time\",\"date\",\"active\",\"index\""
-limit = 1
+limit = 3
 count = 0
 idealmodel = ''
 debug = 0
 
 id = 0
-keys = redis.keys('*');
+filter = '*'
+#filter= '7055455'
+keys = redis.keys(filter)
 for key in keys:
     id = id + 1
     datasetfile = DATASETDIR + "/sample" + str(id) + ".txt"
@@ -114,7 +117,8 @@ for key in keys:
 		maxDistance = x
 	        out = '[' + str(x) + ':' + str(y) + '] ' + posindex[x]
 		Rmatrix = posindex[x].split()
-	        print out
+		if DEBUG:
+	            print out
 		for id in Rmatrix:
 		    rank[id] = x
   
@@ -133,6 +137,11 @@ for key in keys:
 	        Distance = rank[id]
 	    except:
 		Distance = maxDistance
+
+	    if item['date']:
+		if item['timeflag']:
+		    Distance = -1
+
 	    if id - previd <= Distance:
 		# Extend cluster		   
 		try:
@@ -152,8 +161,10 @@ for key in keys:
 
 	    clusterRank[clusterID] = clusterRank[clusterID] + int(words)
 	    previd = id
-	print mainindex
-	print str(maxDistance)
+
+	if DEBUG:
+	    print mainindex
+	    print str(maxDistance)
 	
 	#sortedRank = sorted((value,key) for (key,value) in clusterRank.items())
 	x = clusterRank
@@ -168,7 +179,7 @@ for key in keys:
                 for id in row:
 		    item = doc[id]
 		    text = item['tags']
-		    newstext = newstext + text + ' ' 
+		    newstext = newstext + text + '\n' 
 	    else:
 		comments.append(row)
 	    orderID = orderID + 1
