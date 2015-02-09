@@ -15,14 +15,16 @@ ORIGDIR = 'original'
 NEWSDIR = 'news'
 DEBUG = 0
 HEADLINE = "\"id\",\"words\",\"words1\",\"comas\",\"dots\",\"equal\",\"urls\",\"time\",\"date\",\"active\",\"index\""
-limit = 3
+limit = 100
 count = 0
 idealmodel = ''
 debug = 0
 
 id = 0
-filter = '*'
-#filter= '7055455'
+filter = '*pravda*'
+filter = '*nos*html'
+filter = '*dw.de*'
+filter = "*sixth-division-coach*"
 keys = redis.keys(filter)
 for key in keys:
     id = id + 1
@@ -50,6 +52,7 @@ for key in keys:
             data = html
         else:
             data = html.decode(charset)
+	    #data = html
 
         (x, y, doc, freq, posindex, mainindex) = buildpattern(data, 'd')
 	sorted(doc, key=int)
@@ -128,21 +131,33 @@ for key in keys:
 	rowcluster = []
 	clusterID = 0
 	maxDistance = maxDistance / 2
+	#maxDistance = 10
 	clusterRank = {}
 	for id in mainindex:
 	    x = id
 	    item = doc[id]
-	    words = item['words']
+	    words = item['visiblewords']
+	    comas = item['comas']
+	    dots = item['dots']
+	    code = item['code']
 	    try:
 	        Distance = rank[id]
 	    except:
 		Distance = maxDistance
 
+	    if words <= 5:
+		Distance = -1
+		if comas <= 1:
+		    if dots <= 1:
+			Distance = -1
+
 	    if item['date']:
 		if item['timeflag']:
 		    Distance = -1
 
-	    if id - previd <= Distance:
+	    delta = id - previd
+	    print '[' + str(id) + '] ' + str(delta) + ' ' + code + ' ' + str(Distance) + ' ' + str(words)
+	    if abs(delta) <= Distance:
 		# Extend cluster		   
 		try:
 		    rowcluster = clusters[clusterID]
@@ -175,11 +190,12 @@ for key in keys:
 	comments = []
 	for clusterID, value in sorted(clusterRank.iteritems(), key=lambda (k,v): (v,k), reverse = True):
 	    row = clusters[clusterID]
-	    if orderID == 0:
+	    if orderID >= 0:
                 for id in row:
 		    item = doc[id]
 		    text = item['tags']
-		    newstext = newstext + text + '\n' 
+		    code = item['code']
+		    newstext = newstext + str(orderID) + '=' + str(id) + ' ' + code + ' ' +text + '\n' 
 	    else:
 		comments.append(row)
 	    orderID = orderID + 1

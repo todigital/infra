@@ -23,6 +23,7 @@ def buildpattern(html, debug):
     
     # HTMLDELIM = ["</title>", "</div>", "</script>", "</p>", "</li>", "</html>"]
     html = re.sub(r'<script', "\n<script", html)
+    html = re.sub(r'<img', "\n<img", html)
     html = re.sub(r'<a', " <a", html)
     html = re.sub(r'<style', "\n<style", html)
     html = re.sub(r'<\/script>', "\n</script>\n", html)
@@ -33,6 +34,7 @@ def buildpattern(html, debug):
     html = re.sub(r'<\/li>', "</li>\n", html)
     html = re.sub(r'<\/style>', "\n</style>\n", html)
     html = re.sub(r'<\/dd>', "</dd>\n", html)
+    html = re.sub(r'\nalt ', "alt ", html)
 
     htmlstrings = html.splitlines()
 
