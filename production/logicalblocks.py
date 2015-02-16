@@ -51,23 +51,23 @@ def getblocks(x,y,doc):
 
     return coords
 
-def getdistance(freq):
+def getdistance(freq, posindex, DEBUG):
     maxDistance = 0
     rank = {}
 
-    if freq:
-        maxDistance = 0
-        rank = {}
+    try:
         for x in sorted(freq):
             y = freq[x]
             if y > 1:
                 maxDistance = x
                 out = '[' + str(x) + ':' + str(y) + '] ' + posindex[x]
                 Rmatrix = posindex[x].split()
-                if DEBUG:
+                if DEBUG == 'distance':
                     print out
                 for id in Rmatrix:
                     rank[id] = x
+    except:
+	print "Warning: error\n";
 
-    return rank
+    return maxDistance
 

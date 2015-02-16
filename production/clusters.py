@@ -1,6 +1,8 @@
 #!/usr/bin/python
 
-def makeclusters(maxDistance, doc, mainindex):
+import re
+
+def makeclusters(maxDistance, doc, mainindex, DEBUG):
     previd = 0
     clusters = {}
     rowcluster = []
@@ -9,14 +11,20 @@ def makeclusters(maxDistance, doc, mainindex):
     #maxDistance = 10
     clusterRank = {}
 
+    if DEBUG == 'clusters':
+	print "Clustering...\n"
+
     try:
         for id in mainindex:
             x = id
+
+	    # Attributes
             item = doc[id]
             words = item['visiblewords']
             comas = item['comas']
             dots = item['dots']
             code = item['code']
+
             try:
                 Distance = rank[id]
             except:
@@ -33,7 +41,9 @@ def makeclusters(maxDistance, doc, mainindex):
                     Distance = -1
 
             delta = id - previd
-            print '[' + str(id) + '] ' + str(delta) + ' ' + code + ' ' + str(Distance) + ' ' + str(words)
+	    if DEBUG == 'clusters':
+                print '[' + str(id) + '] ' + str(delta) + ' ' + code + ' ' + str(Distance) + ' ' + str(words)
+
             if abs(delta) <= Distance:
                 # Extend cluster
                 try:
